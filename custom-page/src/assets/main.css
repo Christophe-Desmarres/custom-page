@@ -1,11 +1,31 @@
 @import './base.css';
 
+
 #app {
-  max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-
   font-weight: normal;
+  height: 100vh;
+  display: flex;
+  flex-flow: column nowrap;
+
+}
+
+header {
+  flex-shrink: 1;
+
+}
+
+main {
+  flex-grow: 1;
+  flex-basis: auto;
+  flex-shrink: 0;
+
+}
+
+footer {
+  flex-shrink: 1;
+
 }
 
 a,
@@ -28,8 +48,27 @@ a,
   }
 
   #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    height: 100vh;
+    display: flex;
+    flex-flow: column nowrap;
     padding: 0 2rem;
+
+  }
+
+  header {
+    flex-shrink: 1;
+
+  }
+
+  main {
+    flex-grow: 1;
+    flex-basis: auto;
+    flex-shrink: 0;
+
+  }
+
+  footer {
+    flex-shrink: 1;
+
   }
 }

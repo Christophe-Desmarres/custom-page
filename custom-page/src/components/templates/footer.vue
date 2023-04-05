@@ -1,7 +1,10 @@
 <template>
-    <div class="footer">
-        <h1>This is a footer</h1>
-    </div>
+    <footer>
+        <a href="#">home</a>
+        <a href="#">about</a>
+        <a href="#">contact</a>
+        
+    </footer>
 </template>
 
 <script>
@@ -11,6 +14,25 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+}
+
+footer a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 1rem;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+
 
 </style>
