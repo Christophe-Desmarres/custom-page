@@ -1,74 +1,68 @@
-@import './base.css';
+@import './reset.css';
+
+:root {
+  --c-txt-white: #f0f4ee;
+  --c-txt-black: #333;
+  --c-txt-indigo: #2c3e50;
+
+  --c-bg-white: #f0f4ee;
+  --c-bg-black: #333;
+  --c-bg-indigo: #2c3e50;
+
+  --v-main-color:hsla(160, 100%, 37%, 1);
+
+}
+
+/* semantic color variables for this project */
+:root {
+  --color-text: var(--c-txt-indigo);
+  --color-background: var(--c-bg-white);
+}
+
+:root{
+  --color-text-reverse: var(--c-txt-white);
+  --color-background-reverse: var(--c-bg-black);
+}
 
 
 #app {
-  margin: 0 auto;
-  padding: 2rem;
+  margin: 0;
   font-weight: normal;
   height: 100vh;
   display: flex;
   flex-flow: column nowrap;
-
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+  Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-size: 16px;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 header {
   flex-shrink: 1;
-
 }
 
 main {
   flex-grow: 1;
   flex-basis: auto;
   flex-shrink: 0;
-
+  padding: 0 1rem;
 }
 
 footer {
   flex-shrink: 1;
-
 }
 
-a,
-.green {
+a {
   text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
   transition: 0.4s;
+  padding: 0.5rem;
 }
 
 @media (hover: hover) {
   a:hover {
     background-color: hsla(160, 100%, 37%, 0.2);
-  }
-}
-
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
-
-  #app {
-    height: 100vh;
-    display: flex;
-    flex-flow: column nowrap;
-    padding: 0 2rem;
-
-  }
-
-  header {
-    flex-shrink: 1;
-
-  }
-
-  main {
-    flex-grow: 1;
-    flex-basis: auto;
-    flex-shrink: 0;
-
-  }
-
-  footer {
-    flex-shrink: 1;
-
+    border-radius: 15px;
   }
 }

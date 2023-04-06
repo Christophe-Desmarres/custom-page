@@ -17,15 +17,15 @@ export default {
 <style scoped>
 
 footer {
-    background-color: #333;
-    color: #fff;
+    background-color: var(--color-background-reverse);
     padding: 1rem;
     text-align: center;
 }
 
 footer a {
-    color: #fff;
+    color: var(--color-text-reverse);
     text-decoration: none;
+    font-size: 1.2rem;
     margin: 0 1rem;
 }
 
