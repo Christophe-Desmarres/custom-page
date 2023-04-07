@@ -8,7 +8,7 @@
                 @drop="onDrop($event, 1)"
                 @dragover.prevent
                 @dragenter.prevent>
-
+                Action
                 <div v-for="item in listOne" 
                 :key="item.title" 
                 class="drag-el"
@@ -29,6 +29,7 @@
                 @drop="onDrop($event, 2)"
                 @dragover.prevent
                 @dragenter.prevent>
+                workflow
                     <div
                         class="drag-el"
                         v-for="item in listTwo"
@@ -41,11 +42,21 @@
                     </div>                
             </div>
 
+            
+            <div class="custom__content__logo">
+                <img :src="logo" alt="logo" id="logo" @load="convertToWebp">
+                <img :src="newLogo" alt="logo">
+
+            </div>
+
         </div>
     </div>
 </template>
 
 <script>
+import logo from '../assets/images/logo400px.png';
+
+
 // source : https://learnvue.co/articles/vue-drag-and-drop
 // source : https://www.youtube.com/watch?v=-kZLD40d-tI&t=4s
 // pour aller plus loin : https://www.youtube.com/watch?v=wWKhKPN_Pmw
@@ -54,6 +65,8 @@ export default {
     name: 'Custom',
     data() {
     return {
+      logo,
+      newLogo: '',
       items: [
         {
           id: 0,
@@ -85,12 +98,25 @@ export default {
       evt.dataTransfer.effectAllowed = 'move'
       evt.dataTransfer.setData('itemID', item.id)
     },
+
     onDrop(evt, list) {
         console.log(evt)
 
       const itemID = evt.dataTransfer.getData('itemID')
       const item = this.items.find((item) => item.id == itemID)
       item.list = list
+    },
+    // function to convert image to webp
+    convertToWebp() {
+      const img = document.getElementById('logo');
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = img.width;
+      canvas.height = img.height;
+      ctx.drawImage(img, 0, 0);
+      const dataURL = canvas.toDataURL('image/webp');
+      //this.logo = dataURL;
+      this.newLogo = dataURL;
     },
   },
     computed: {
@@ -100,6 +126,7 @@ export default {
     listTwo() {
       return this.items.filter((item) => item.list === 2)
     },
+
   },
 
 }
