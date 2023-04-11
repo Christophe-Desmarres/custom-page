@@ -1,0 +1,175 @@
+{
+  "clients": [
+    {
+      "id": 0,
+      "name": "Gérard",
+      "lastname": "Mensoif",
+      "tel": "0102030405",
+      "mail": "mail@fakemail.com"
+    },
+    {
+      "id": 1,
+      "name": "John",
+      "lastname": "Doe",
+      "tel": "0102030405",
+      "mail": "mail@fakemail.com"
+    },
+    {
+      "id": 2,
+      "name": "Alain",
+      "lastname": "Deloin",
+      "tel": "0102030405",
+      "mail": "mail@fakemail.com"
+    },
+    {
+      "id": 3,
+      "name": "Abel",
+      "lastname": "Auboisdormant",
+      "tel": "0102030405",
+      "mail": "mail@fakemail.com"
+    },
+    {
+      "id": 4,
+      "name": "Kelly",
+      "lastname": "Diote",
+      "tel": "0102030405",
+      "mail": "mail@fakemail.com"
+    },
+    {
+      "id": 5,
+      "name": "Jim",
+      "lastname": "Nastik",
+      "tel": "0102030405",
+      "mail": "mail@fakemail.com"
+    },
+    {
+      "id": 6,
+      "name": "Léonie",
+      "lastname": "Das",
+      "tel": "0102030405",
+      "mail": "mail@fakemail.com"
+    },
+    {
+      "id": 7,
+      "name": "Phil",
+      "lastname": "Defer",
+      "tel": "0102030405",
+      "mail": "mail@fakemail.com"
+    },
+    {
+      "id": 8,
+      "name": "Eléonore",
+      "lastname": "Iléosud",
+      "tel": "0102030405",
+      "mail": "mail@fakemail.com"
+    },
+    {
+      "id": 9,
+      "name": "Usama",
+      "lastname": "Fémale",
+      "tel": "0102030405",
+      "mail": "mail@fakemail.com"
+    },
+    {
+      "id": 10,
+      "name": "Jacques",
+      "lastname": "Célère",
+      "tel": "0102030405",
+      "mail": "mail@fakemail.com"
+    },
+    {
+      "id": 11,
+      "name": "Vincent",
+      "lastname": "Time",
+      "tel": "0102030405",
+      "mail": "mail@fakemail.com"
+    },
+    {
+      "id": 12,
+      "name": "Jerry",
+      "lastname": "Canne",
+      "tel": "0102030405",
+      "mail": "mail@fakemail.com"
+    }
+  ],
+
+  "items": [
+    {
+      "id": 0,
+      "title": "Répondre demande de contact",
+      "actions": ["enregistrer client", "enregistrer prestation"],
+      "info": ["clientId", "prestationId"],
+      "list": 1
+    },
+    {
+      "id": 1,
+      "title": "Relance demande de contact",
+      "actions": [],
+      "info": ["clientId", "prestationId"],
+      "list": 1
+    },
+    {
+      "id": 2,
+      "title": "Répondre prise de rendez vous",
+      "list": 1
+    },
+    {
+      "id": 3,
+      "title": "inscription client",
+      "list": 1
+    },
+    {
+      "id": 4,
+      "title": "Réaliser un devis",
+      "list": 1
+    },
+    {
+      "id": 5,
+      "title": "Relance après devis",
+      "list": 1
+    },
+    {
+      "id": 6,
+      "title": "Prise rendez vous signature",
+      "list": 1
+    },
+    {
+      "id": 7,
+      "title": "Rappel avant prestation",
+      "list": 1
+    },
+    {
+      "id": 8,
+      "title": "Prestation",
+      "list": 1
+    }
+  ],
+
+  "prestations": [
+    {
+      "id": 0,
+      "name": "Mariage",
+      "description": "Mariaaaaaage"
+    },
+    {
+      "id": 1,
+      "name": "Anniversaire",
+      "description": "Anniversaire"
+    },
+    {
+      "id": 2,
+      "name": "Soirée privée",
+      "description": "Soirée privée"
+    },
+    {
+      "id": 3,
+      "name": "Soirée d'entreprise",
+      "description": "Soirée d'entreprise"
+    },
+    {
+      "id": 4,
+      "name": "Soirée étudiante",
+      "description": "Soirée étudiante"
+    }
+  ]
+}

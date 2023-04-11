@@ -1,6 +1,21 @@
 <template>
     <div class="custom">
         <h1>Custom</h1>
+
+
+      <select v-model="client">
+        <option v-for="client in clients" :key="client.id" :value="client.id">
+          {{ client.name }} {{ client.lastname}}
+        </option>
+      </select>
+
+      <select v-model="prestation">
+        <option v-for="prestation in prestations" :key="prestation.id" :value="prestation.id">
+          {{ prestation.name }}
+        </option>
+      </select>
+        
+
         <div class="custom__content">
 
             <div
@@ -30,16 +45,38 @@
                 @dragover.prevent
                 @dragenter.prevent>
                 workflow
-                    <div
+
+                <table>
+                    <tr>
+                        <th>check</th>
+                        <th>action</th>
+                        <th>info</th>
+
+                    </tr>
+
+
+
+                    <tr
                         class="drag-el"
                         v-for="item in listTwo"
                         :key="item.title"
                         draggable="true"
                         @dragstart="startDrag($event, item)"
                         >
-                        <input type="text" v-model="item.title">
-                       
-                    </div>                
+                                <td>
+                                    <input type="checkbox" v-model="item.checked">
+                                </td>
+                                <td>
+                                    {{ item.title }}
+                                </td>
+                                <td>
+                                  <div v-for="(info, index) in item.info" :key="info" :value="info">
+                                    {{ clients[client].name }}<br>
+                                    {{ prestations[prestation].name }}<br>
+                                  </div>
+                                </td>
+                          </tr>                
+                        </table>
             </div>
 
             
@@ -55,6 +92,7 @@
 
 <script>
 import logo from '../assets/images/logo400px.png';
+import dbData from '../data/data.json';
 
 
 // source : https://learnvue.co/articles/vue-drag-and-drop
@@ -66,42 +104,30 @@ export default {
     data() {
     return {
       logo,
+      clients: dbData.clients,
+      items: dbData.items,
+      prestations: dbData.prestations,
+      SelectedClient:'',
+      client: '',
+      prestation: '',
       newLogo: '',
-      items: [
-        {
-          id: 0,
-          title: 'input A',
-          list: 1,
-        },
-        {
-          id: 1,
-          title: 'input B',
-          list: 1,
-        },
-        {
-          id: 2,
-          title: 'input C',
-          list: 1,
-        },
-        {
-          id: 3,
-          title: 'input D',
-          list: 1,
-        },
-      ],
+
+
+
     }
   },
     methods: {
     startDrag(evt, item) {
-        console.log(evt)
+      console.log('je prends la case "'+ evt.srcElement.__vnode.key + '"')
+      // console.log(evt)
       evt.dataTransfer.dropEffect = 'move'
       evt.dataTransfer.effectAllowed = 'move'
       evt.dataTransfer.setData('itemID', item.id)
     },
 
     onDrop(evt, list) {
-        console.log(evt)
-
+      console.log('je pose')
+      // console.log(evt)
       const itemID = evt.dataTransfer.getData('itemID')
       const item = this.items.find((item) => item.id == itemID)
       item.list = list
@@ -157,5 +183,57 @@ export default {
   background-color: #fff;
   margin-bottom: 10px;
   padding: 5px;
+}
+
+table {
+  border: 2px solid #42b983;
+  border-radius: 3px;
+  background-color: #fff;
+}
+
+th {
+  background-color: #42b983;
+  color: rgba(255, 255, 255, 0.66);
+  cursor: pointer;
+  user-select: none;
+}
+
+td {
+  background-color: #f9f9f9;
+}
+
+th,
+td {
+  min-width: 120px;
+  padding: 10px 20px;
+}
+
+th.active {
+  color: #fff;
+}
+
+th.active .arrow {
+  opacity: 1;
+}
+
+.arrow {
+  display: inline-block;
+  vertical-align: middle;
+  width: 0;
+  height: 0;
+  margin-left: 5px;
+  opacity: 0.66;
+}
+
+.arrow.asc {
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 4px solid #fff;
+}
+
+.arrow.dsc {
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid #fff;
 }
 </style>
