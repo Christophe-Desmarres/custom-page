@@ -99,49 +99,58 @@
       "title": "Répondre demande de contact",
       "actions": ["enregistrer client", "enregistrer prestation"],
       "info": ["clientId", "prestationId"],
-      "list": 1
+      "list": 1,
+      "order": 0
     },
     {
       "id": 1,
       "title": "Relance demande de contact",
       "actions": [],
       "info": ["clientId", "prestationId"],
-      "list": 1
+      "list": 1,
+      "order": 0
     },
     {
       "id": 2,
       "title": "Répondre prise de rendez vous",
-      "list": 1
+      "list": 1,
+      "order": 0
     },
     {
       "id": 3,
       "title": "inscription client",
-      "list": 1
+      "list": 1,
+      "order": 2
     },
     {
       "id": 4,
       "title": "Réaliser un devis",
-      "list": 1
+      "list": 1,
+      "order": 0
     },
     {
       "id": 5,
       "title": "Relance après devis",
-      "list": 1
+      "list": 1,
+      "order": 0
     },
     {
       "id": 6,
       "title": "Prise rendez vous signature",
-      "list": 1
+      "list": 1,
+      "order": 0
     },
     {
       "id": 7,
       "title": "Rappel avant prestation",
-      "list": 1
+      "list": 1,
+      "order": 0
     },
     {
       "id": 8,
       "title": "Prestation",
-      "list": 1
+      "list": 1,
+      "order": 1
     }
   ],
 

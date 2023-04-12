@@ -18,27 +18,59 @@
 
         <div class="custom__content">
 
-            <div
-                class="drop-zone action-zone"
-                @drop="onDrop($event, 1)"
-                @dragover.prevent
-                @dragenter.prevent>
-                Action
-                <div v-for="item in listOne" 
-                :key="item.title" 
-                class="drag-el"
-                draggable="true"
-                @dragstart="startDrag($event, item)"
 
-                >
-                    {{ item.title }}
+
+            <draggable 
+              class="list-group drop-zone action-zone"
+              v-model="items" 
+              :list="items"
+              :group="{ name: 'actions', pull: 'clone', put: false }"
+              @change="log"
+              >
+              <template #item="{element}">
+                <div class="drag-el list-group-item">
+                  <i class="fa fa-align-justify handle"></i>
+                  {{element.title}}
                 </div>
-            </div>
-            <div class="symbol">
-                &#171;&#61;&#187;
-            </div>
+              </template>
+            </draggable>
 
 
+
+
+
+
+            
+            
+            <transition-group type="transition" name="flip-list">
+            <draggable
+            tag="ul"
+            v-model="list"
+            class="list-group drop-zone receive-zone"
+            v-bind="dragOptions"
+            @start="isDragging = true"
+            @end="isDragging = false"
+            >
+            
+            <template #item="{element, index}">
+                <li class="drag-el list-group-item">
+                  <i
+              :class="
+                element.fixed ? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'
+              "
+              @click="element.fixed = !element.fixed"
+              aria-hidden="true"
+            ></i>
+                  {{ index }} 
+                  <i class="fa fa-align-justify handle"></i>
+                  {{element.title}} </li>
+                </template>
+                
+              </draggable>
+            </transition-group>
+              
+
+<!-- TAB view
             <div                 
                 class="drop-zone receive-zone"
                 @drop="onDrop($event, 2)"
@@ -77,20 +109,21 @@
                                 </td>
                           </tr>                
                         </table>
-            </div>
+            </div> -->
 
-            
+<!-- Logo
             <div class="custom__content__logo">
                 <img :src="logo" alt="logo" id="logo" @load="convertToWebp">
                 <img :src="newLogo" alt="logo">
 
-            </div>
+            </div> -->
 
         </div>
     </div>
 </template>
 
 <script>
+import draggable from 'vuedraggable';
 import logo from '../assets/images/logo400px.png';
 import dbData from '../data/data.json';
 
@@ -101,8 +134,14 @@ import dbData from '../data/data.json';
 
 export default {
     name: 'Custom',
+    components: {
+            draggable,
+        },
+    display: "Transition",
+    order: 6,
     data() {
     return {
+      drag: false,
       logo,
       clients: dbData.clients,
       items: dbData.items,
@@ -111,9 +150,10 @@ export default {
       client: '',
       prestation: '',
       newLogo: '',
-
-
-
+      listOne: [],
+      listTwo: [],
+      list: [],
+      nestList: [],
     }
   },
     methods: {
@@ -144,14 +184,23 @@ export default {
       //this.logo = dataURL;
       this.newLogo = dataURL;
     },
+
   },
     computed: {
-    listOne() {
-      return this.items.filter((item) => item.list === 1)
+      dragOptions() {
+      return {
+        animation: 500,
+        group: "actions",
+        disabled: false,
+        ghostClass: "ghost"
+      }
     },
-    listTwo() {
-      return this.items.filter((item) => item.list === 2)
-    },
+    // listOne() {
+    //   return this.items.filter((item) => item.list === 1).sort((a,b)=>a.order <= b.order ? -1 : 1)
+    // },
+    // listTwo() {
+    //   return this.items.filter((item) => item.list === 2).sort((a,b)=>a.order <= b.order ? -1 : 1)
+    // },
 
   },
 
@@ -235,5 +284,35 @@ th.active .arrow {
   border-left: 4px solid transparent;
   border-right: 4px solid transparent;
   border-top: 4px solid #fff;
+}
+
+
+
+
+
+
+
+
+
+
+.flip-list-move,
+.sortable-chosen {
+  transition: transform 2.5s;
+}
+.no-move {
+  transition: transform 0s;
+}
+.ghost {
+  opacity: 0.5;
+  background: #c8ebfb;
+}
+.list-group {
+  min-height: 20px;
+}
+.list-group-item {
+  cursor: move;
+}
+.list-group-item i {
+  cursor: pointer;
 }
 </style>
