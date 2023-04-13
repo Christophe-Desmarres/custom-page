@@ -3,6 +3,10 @@ import TheWelcome from '../components/TheWelcome.vue'
 </script>
 
 <template>
+
+
+
+
     <TheWelcome />
     <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium quaerat eveniet doloribus vero ducimus reiciendis doloremque tenetur porro iste laborum, molestias, voluptatem ipsam itaque ut aliquam voluptates dolorum ad. Minus?</p>
     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti tempora distinctio laborum eveniet ad eius dicta pariatur necessitatibus vitae veritatis!</p>
@@ -14,4 +18,7 @@ import TheWelcome from '../components/TheWelcome.vue'
 </template>
 
 <style scoped>
+
+
+
 </style>
