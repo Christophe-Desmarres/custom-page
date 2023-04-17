@@ -22,16 +22,18 @@
 
             <draggable 
               class="list-group drop-zone action-zone"
+              tag="ul"
+              item-key="id"
               v-model="items" 
               :list="items"
               :group="{ name: 'actions', pull: 'clone', put: false }"
               @change="log"
               >
               <template #item="{element}">
-                <div class="drag-el list-group-item">
+                <li class="drag-el list-group-item">
                   <i class="fa fa-align-justify handle"></i>
                   {{element.title}}
-                </div>
+                </li>
               </template>
             </draggable>
 
@@ -42,9 +44,9 @@
 
             
             
-            <transition-group type="transition" name="flip-list">
             <draggable
             tag="ul"
+            item-key="id"
             v-model="list"
             class="list-group drop-zone receive-zone"
             v-bind="dragOptions"
@@ -63,11 +65,20 @@
             ></i>
                   {{ index }} 
                   <i class="fa fa-align-justify handle"></i>
-                  {{element.title}} </li>
+                  {{element.title}} 
+                  <input type="number" min="1" class="form-control" v-model="element.text" />
+
+                  <i class="fa fa-times close" @click="removeAt(index)"></i>
+                
+                </li>
                 </template>
                 
               </draggable>
-            </transition-group>
+
+              <form action="/action_page.php" method="get">
+                <label for="ok">validate</label>
+                <input type="range" id="ok" name="ok" min="0" max="100" :value="ok">
+              </form>
               
 
 <!-- TAB view
@@ -154,24 +165,17 @@ export default {
       listTwo: [],
       list: [],
       nestList: [],
+      ok: 0,
     }
   },
     methods: {
-    startDrag(evt, item) {
-      console.log('je prends la case "'+ evt.srcElement.__vnode.key + '"')
-      // console.log(evt)
-      evt.dataTransfer.dropEffect = 'move'
-      evt.dataTransfer.effectAllowed = 'move'
-      evt.dataTransfer.setData('itemID', item.id)
+      log() {
+        console.log(this.items);
+      },
+      removeAt(idx) {
+      this.list.splice(idx, 1);
     },
 
-    onDrop(evt, list) {
-      console.log('je pose')
-      // console.log(evt)
-      const itemID = evt.dataTransfer.getData('itemID')
-      const item = this.items.find((item) => item.id == itemID)
-      item.list = list
-    },
     // function to convert image to webp
     convertToWebp() {
       const img = document.getElementById('logo');
@@ -232,6 +236,7 @@ export default {
   background-color: #fff;
   margin-bottom: 10px;
   padding: 5px;
+  position: relative;
 }
 
 table {
@@ -243,7 +248,6 @@ table {
 th {
   background-color: #42b983;
   color: rgba(255, 255, 255, 0.66);
-  cursor: pointer;
   user-select: none;
 }
 
@@ -287,18 +291,33 @@ th.active .arrow {
 }
 
 
+[data-draggable="true"]{
+  cursor: grab;
+}
+
+li[draggable="true"] {
+  cursor: grabbing;
+}
 
 
 
 
-
-
+i.close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 5px;
+  cursor: pointer;
+  font-weight: 800;
+}
 
 
 .flip-list-move,
 .sortable-chosen {
   transition: transform 2.5s;
+  cursor: grabbing;
 }
+
 .no-move {
   transition: transform 0s;
 }
@@ -309,10 +328,63 @@ th.active .arrow {
 .list-group {
   min-height: 20px;
 }
-.list-group-item {
-  cursor: move;
+
+
+
+.sortable-chosen.sortable-ghost {
+  opacity: 0.5;
+  background: #c8ebfb;
+  cursor: grabbing;
 }
-.list-group-item i {
+
+#ok {
+  background-color: #42b983;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 3px;
   cursor: pointer;
+  font-size: 1.2rem;
+  margin-top: 20px;
 }
+
+input[type="range"] {
+		outline: 0;
+		border: 0;
+		border-radius: 500px;
+		width: 400px;
+		max-width: 100%;
+		margin: 24px 0 16px;
+		transition: box-shadow 0.2s ease-in-out;
+		@media screen and (-webkit-min-device-pixel-ratio: 0) {
+			& {
+				overflow: hidden;
+				height: 40px;
+				-webkit-appearance: none;
+				background-color: #ddd;
+			}
+			&::-webkit-slider-runnable-track {
+				height: 40px;
+				-webkit-appearance: none;
+				color: #444;
+				transition: box-shadow 0.2s ease-in-out;
+			}
+			&::-webkit-slider-thumb {
+				width: 40px;
+				-webkit-appearance: none;
+				height: 40px;
+				cursor: ew-resize;
+				background: #fff;
+				box-shadow: -340px 0 0 320px #1597ff, inset 0 0 0 40px #1597ff;
+				border-radius: 50%;
+				transition: box-shadow 0.2s ease-in-out;
+				position: relative;
+			}
+			&:active::-webkit-slider-thumb {
+				background: #fff;
+				box-shadow: -340px 0 0 320px #1597ff, inset 0 0 0 3px #1597ff;
+			}
+		}
+  }
+
 </style>

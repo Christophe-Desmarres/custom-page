@@ -1,7 +1,6 @@
 <template>
     
   <div 
-  :class="{ 'loading-out' : load}"
   class="loader"
   >
   <span class="lettre">C</span>
@@ -21,7 +20,6 @@
 <script>
 export default {
   name: 'LoaderTpl',
-
 }
 </script>
 

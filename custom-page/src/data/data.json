@@ -97,60 +97,69 @@
     {
       "id": 0,
       "title": "Répondre demande de contact",
+      "text":"",
       "actions": ["enregistrer client", "enregistrer prestation"],
       "info": ["clientId", "prestationId"],
       "list": 1,
-      "order": 0
+      "order": 1
     },
     {
       "id": 1,
       "title": "Relance demande de contact",
+      "text":"",
       "actions": [],
       "info": ["clientId", "prestationId"],
-      "list": 1,
-      "order": 0
-    },
-    {
-      "id": 2,
-      "title": "Répondre prise de rendez vous",
-      "list": 1,
-      "order": 0
-    },
-    {
-      "id": 3,
-      "title": "inscription client",
       "list": 1,
       "order": 2
     },
     {
+      "id": 2,
+      "title": "Répondre prise de rendez vous",
+      "text":"",
+      "list": 1,
+      "order": 3
+    },
+    {
+      "id": 3,
+      "title": "inscription client",
+      "text":"",
+      "list": 1,
+      "order": 4
+    },
+    {
       "id": 4,
       "title": "Réaliser un devis",
+      "text":"",
       "list": 1,
-      "order": 0
+      "order": 5
     },
     {
       "id": 5,
       "title": "Relance après devis",
+      "text":"",
       "list": 1,
-      "order": 0
+      "order": 6
     },
     {
       "id": 6,
       "title": "Prise rendez vous signature",
+      "text":"",
       "list": 1,
-      "order": 0
+      "order": 7
     },
     {
       "id": 7,
       "title": "Rappel avant prestation",
+      "text":"",
       "list": 1,
-      "order": 0
+      "order": 8
     },
     {
       "id": 8,
       "title": "Prestation",
+      "text":"",
       "list": 1,
-      "order": 1
+      "order": 9
     }
   ],
 
