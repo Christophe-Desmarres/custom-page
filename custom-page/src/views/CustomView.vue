@@ -75,9 +75,21 @@
                 
               </draggable>
 
-              <form action="/action_page.php" method="get">
-                <label for="ok">validate</label>
-                <input type="range" id="ok" name="ok" min="0" max="100" :value="ok">
+              <form >
+                <input 
+                type="range" 
+                id="range" 
+                name="ok" 
+                min="0" 
+                max="100" 
+                v-model="vok" 
+                @change="vok==100 ? finish() :handleMouseMove() "
+                >
+                <br>
+                <label 
+                for="ok"
+                id="range-value"
+                >{{ vok==0 ? "slide to unlock" : vok==100 ? "terminado" : vok }}</label>
               </form>
               
 
@@ -165,7 +177,7 @@ export default {
       listTwo: [],
       list: [],
       nestList: [],
-      ok: 0,
+      vok: 0,
     }
   },
     methods: {
@@ -174,6 +186,25 @@ export default {
       },
       removeAt(idx) {
       this.list.splice(idx, 1);
+    },
+    finish() {
+      alert('terminado')
+    },
+    handleMouseMove() {
+      const rangeValueElement = document.querySelector("#range-value")
+      const inputElement = document.querySelector('input[type="range"]')
+      const fillAreaElement = document.querySelector(".fill-area")
+      
+      const hueRotate = "hue-rotate(" + this.vok + "deg)"
+      
+      rangeValueElement.textContent = this.vok
+      rangeValueElement.style.filter = hueRotate
+      
+      inputElement.style.filter = hueRotate
+      
+      fillAreaElement.style.left = this.vok + "vw"
+      fillAreaElement.style.width = (100-this.vok) + "vw"
+      fillAreaElement.style.filter = hueRotate
     },
 
     // function to convert image to webp
@@ -337,54 +368,117 @@ i.close {
   cursor: grabbing;
 }
 
-#ok {
-  background-color: #42b983;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 3px;
-  cursor: pointer;
-  font-size: 1.2rem;
-  margin-top: 20px;
+label {
+  position: static;
+  width: 100px;
+  z-index: 1;
+  font: 3rem "Monoton", sans-serif;
+  color: #EC7474;
+  margin: -5rem 0 2rem;
 }
 
-input[type="range"] {
-		outline: 0;
-		border: 0;
-		border-radius: 500px;
-		width: 400px;
-		max-width: 100%;
-		margin: 24px 0 16px;
-		transition: box-shadow 0.2s ease-in-out;
-		@media screen and (-webkit-min-device-pixel-ratio: 0) {
-			& {
-				overflow: hidden;
-				height: 40px;
-				-webkit-appearance: none;
-				background-color: #ddd;
-			}
-			&::-webkit-slider-runnable-track {
-				height: 40px;
-				-webkit-appearance: none;
-				color: #444;
-				transition: box-shadow 0.2s ease-in-out;
-			}
-			&::-webkit-slider-thumb {
-				width: 40px;
-				-webkit-appearance: none;
-				height: 40px;
-				cursor: ew-resize;
-				background: #fff;
-				box-shadow: -340px 0 0 320px #1597ff, inset 0 0 0 40px #1597ff;
-				border-radius: 50%;
-				transition: box-shadow 0.2s ease-in-out;
-				position: relative;
-			}
-			&:active::-webkit-slider-thumb {
-				background: #fff;
-				box-shadow: -340px 0 0 320px #1597ff, inset 0 0 0 3px #1597ff;
-			}
-		}
-  }
+/* barre de progression */
+input[type=range] {
+  appearance: none;
+  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+  background: transparent; /* Otherwise white in Chrome */
+  border: none;
+  outline: none;
+  /* background-color: #42b983; */
+  height: 2rem;
+  z-index: 2;
+  width: 50vw;
+  border-radius: 100vmax;
+  box-shadow: inset 3px 3px 5px -1px #000;
+}
+
+/* rond d'accroche  : Thumb */
+input[type=range]::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+  height: 2rem;
+  width: 2rem;
+  border-radius: 50%;
+  background: #f0b208;
+  cursor: ew-resize;
+    box-shadow: 5px 5px 8px -1px #000;
+  transition: box-shadow .3s ease-in-out;
+}
+  
+input[type=range]:hover::-webkit-slider-thumb{  
+  background: #f5c748;
+  box-shadow: 3px 3px 5px -1px #000;
+}
+/* 
+input[type=range]::-moz-range-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 36px;
+  width: 16px;
+  border-radius: 3px;
+  background: #ffffff;
+  cursor: pointer;
+} */
+
+/* 
+input[type=range]::-ms-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 36px;
+  width: 16px;
+  border-radius: 3px;
+  background: #ffffff;
+  cursor: pointer;
+} */
+
+
+
+/* barre de progression : Track */
+/* input[type=range]::-webkit-slider-runnable-track  {
+  width: 100%;
+  border-radius: 50px;
+}   */
+
+/* 
+input[type=range]::-moz-range-track {
+  width: 100%;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #3071a9;
+  border: 0.2px solid #010101;
+  border-radius: 50px;
+} */
+
+/* 
+input[type=range]::-ms-track {
+  width: 100%;
+  cursor: pointer;
+
+  background: transparent; 
+  border-color: transparent;
+  color: transparent;
+}   */
+
+
+ /* global range */
+/* input[type=range]:focus {
+  outline: none; 
+  Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though.
+}   */
+
+
+/* input[type=range]::-ms-fill-upper {
+  background: #3071a9;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+} */
+
+/* input[type=range]:focus::-ms-fill-lower {
+  background: #3071a9;
+} */
+/* input[type=range]:focus::-ms-fill-upper {
+  background: #42b983;
+} */
+
 
 </style>
