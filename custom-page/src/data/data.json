@@ -98,6 +98,7 @@
       "id": 0,
       "title": "Répondre demande de contact",
       "text":"",
+      "delay":0,
       "actions": ["enregistrer client", "enregistrer prestation"],
       "info": ["clientId", "prestationId"],
       "list": 1,
@@ -107,6 +108,7 @@
       "id": 1,
       "title": "Relance demande de contact",
       "text":"",
+      "delay":0,
       "actions": [],
       "info": ["clientId", "prestationId"],
       "list": 1,
@@ -116,6 +118,7 @@
       "id": 2,
       "title": "Répondre prise de rendez vous",
       "text":"",
+      "delay":0,
       "list": 1,
       "order": 3
     },
@@ -123,6 +126,7 @@
       "id": 3,
       "title": "inscription client",
       "text":"",
+      "delay":0,
       "list": 1,
       "order": 4
     },
@@ -130,6 +134,7 @@
       "id": 4,
       "title": "Réaliser un devis",
       "text":"",
+      "delay":0,
       "list": 1,
       "order": 5
     },
@@ -137,6 +142,7 @@
       "id": 5,
       "title": "Relance après devis",
       "text":"",
+      "delay":0,
       "list": 1,
       "order": 6
     },
@@ -144,6 +150,7 @@
       "id": 6,
       "title": "Prise rendez vous signature",
       "text":"",
+      "delay":0,
       "list": 1,
       "order": 7
     },
@@ -151,6 +158,7 @@
       "id": 7,
       "title": "Rappel avant prestation",
       "text":"",
+      "delay":0,
       "list": 1,
       "order": 8
     },
@@ -158,6 +166,7 @@
       "id": 8,
       "title": "Prestation",
       "text":"",
+      "delay":0,
       "list": 1,
       "order": 9
     }
@@ -189,5 +198,44 @@
       "name": "Soirée étudiante",
       "description": "Soirée étudiante"
     }
+  ],
+
+  "workflows": [
+        {
+      "id": 0,
+      "name": "Mariage",
+      "description": "Mariaaaaaage",
+      "tasks":[
+        {"id":2, "delay":"5"},
+        {"id":3, "delay":"4"},
+        {"id":5, "delay":"20"},
+        {"id":4, "delay":"7"},
+        {"id":8, "delay":"5"},
+        {"id":7, "delay":"30"},
+        {"id":6, "delay":"7"}
+      ]
+    },
+        {
+      "id": 1,
+      "name": "Photobooth",
+      "description": "for the photobooth",
+      "tasks":[
+        {"id":2, "delay":"5"},
+        {"id":3, "delay":"4"},
+        {"id":8, "delay":"5"},
+        {"id":7, "delay":"30"},
+        {"id":6, "delay":"7"}
+      ]
+    },
+        {
+      "id": 2,
+      "name": "Séance photo",
+      "description": "pour les séances portrait, famille, grossesse, bébé, etc...",
+      "tasks":[
+        {"id":2, "delay":"5"},
+        {"id":3, "delay":"4"},
+        {"id":6, "delay":"7"}
+      ]
+    }    
   ]
 }

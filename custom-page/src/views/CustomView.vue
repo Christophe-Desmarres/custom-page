@@ -4,14 +4,23 @@
 
 
       <select v-model="client">
+        <option disabled value="">Choose your client</option>
         <option v-for="client in clients" :key="client.id" :value="client.id">
           {{ client.name }} {{ client.lastname}}
         </option>
       </select>
 
       <select v-model="prestation">
+        <option disabled value="">Choose your prestation</option>
         <option v-for="prestation in prestations" :key="prestation.id" :value="prestation.id">
           {{ prestation.name }}
+        </option>
+      </select>
+
+      <select v-model="workflow" @change="workflowLog">
+        <option disabled value="">Choose your workflow</option>
+        <option v-for="workflow in workflows" :key="workflow.id" :value="workflow.id">
+          {{ workflow.name }}
         </option>
       </select>
         
@@ -45,6 +54,28 @@
             
             
             <draggable
+            v-if="worklow !== ''"
+            tag="ul"
+            item-key="id"
+            v-model="worklow"
+            class="list-group drop-zone receive-zone"
+            v-bind="dragOptions"
+            @start="isDragging = true"
+            @end="isDragging = false"
+            >
+            <template #item="{element, index}">
+                <li class="drag-el list-group-item">
+                  {{ index }} 
+                  <i class="fa fa-align-justify handle"></i>
+                  {{element.name}} 
+                  <input class="form-control" v-model="element.description" />
+                </li>
+                </template>
+                
+              </draggable>
+
+              <draggable
+            v-else
             tag="ul"
             item-key="id"
             v-model="list"
@@ -53,7 +84,6 @@
             @start="isDragging = true"
             @end="isDragging = false"
             >
-            
             <template #item="{element, index}">
                 <li class="drag-el list-group-item">
                   <i
@@ -74,6 +104,7 @@
                 </template>
                 
               </draggable>
+
 
               <form >
                 <input 
@@ -169,9 +200,11 @@ export default {
       clients: dbData.clients,
       items: dbData.items,
       prestations: dbData.prestations,
+      workflows: dbData.workflows,
       SelectedClient:'',
       client: '',
       prestation: '',
+      workflow: '',
       newLogo: '',
       listOne: [],
       listTwo: [],
@@ -184,11 +217,14 @@ export default {
       log() {
         console.log(this.items);
       },
+      workflowLog() {
+        console.log(this.workflow);
+      },
       removeAt(idx) {
       this.list.splice(idx, 1);
     },
     finish() {
-      alert('terminado')
+      console.log('terminado');
     },
     handleMouseMove() {
       const rangeValueElement = document.querySelector("#range-value")
@@ -385,10 +421,10 @@ input[type=range] {
   border: none;
   outline: none;
   /* background-color: #42b983; */
-  height: 2rem;
+  height: 4rem;
   z-index: 2;
-  width: 50vw;
-  border-radius: 100vmax;
+  width: 300px;
+  border-radius: 50px;
   box-shadow: inset 3px 3px 5px -1px #000;
 }
 
@@ -396,8 +432,8 @@ input[type=range] {
 input[type=range]::-webkit-slider-thumb {
   appearance: none;
   -webkit-appearance: none;
-  height: 2rem;
-  width: 2rem;
+  height: 4rem;
+  width: 4rem;
   border-radius: 50%;
   background: #f0b208;
   cursor: ew-resize;
