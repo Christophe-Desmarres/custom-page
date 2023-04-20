@@ -1,8 +1,8 @@
 <template>
     <footer>
-        <a href="#">home</a>
-        <a href="#">about</a>
-        <a href="#">contact</a>
+        <a href="#" aria-current="page">home</a>
+        <a href="#" aria-current="page">about</a>
+        <a href="#" aria-current="page">contact</a>
         
     </footer>
 </template>
@@ -27,10 +27,16 @@ footer a {
     text-decoration: none;
     font-size: 1.2rem;
     margin: 0 1rem;
+    
 }
 
 footer a:hover {
     text-decoration: underline;
+    cursor: not-allowed;
+    opacity: 0.5;
+    text-decoration: none;
+    text-decoration: line-through;
+    text-decoration-thickness: 0.2rem;
 }
 
 

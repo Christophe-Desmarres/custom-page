@@ -22,6 +22,7 @@
         <option v-for="workflow in workflows" :key="workflow.id" :value="workflow.id">
           {{ workflow.name }}
         </option>
+        <option value="">none</option>
       </select>
         
 
@@ -39,57 +40,62 @@
               @change="log"
               >
               <template #item="{element}">
-                <li class="drag-el list-group-item">
-                  <i class="fa fa-align-justify handle"></i>
-                  {{element.title}}
+                <li class="drag-el list-group-item ">
+                  <div class="item_details">
+                    <i class="fa fa-align-justify handle"></i>
+                    {{element.title}}
+                  </div>
                 </li>
               </template>
             </draggable>
 
-
-
-
-
-
-            
+            <div
+            v-if="workflowModel"
+            >
+              <h2 class="worflow">{{ workflows[workflow].name }} </h2>
+              <p class="worflow">{{ workflows[workflow].description }} </p>
             
             <draggable
-            v-if="worklow !== ''"
             tag="ul"
             item-key="id"
-            v-model="worklow"
-            class="list-group drop-zone receive-zone"
+            v-model="workflowModel"
+            class="vif list-group drop-zone receive-zone"
             v-bind="dragOptions"
             @start="isDragging = true"
             @end="isDragging = false"
             >
+            
+            
             <template #item="{element, index}">
-                <li class="drag-el list-group-item">
-                  {{ index }} 
+              <li class="drag-el list-group-item" :aria-label="index">
                   <i class="fa fa-align-justify handle"></i>
-                  {{element.name}} 
-                  <input class="form-control" v-model="element.description" />
+                  <div class="item_details">
+                  {{items[element.id].title}} 
+                  <p>délai : {{ element.delay }} jours</p>
+                </div>
                 </li>
-                </template>
-                
-              </draggable>
+              </template>
+              
+            </draggable>
+            
+          </div>
+
 
               <draggable
-            v-else
+              v-else
             tag="ul"
             item-key="id"
             v-model="list"
-            class="list-group drop-zone receive-zone"
+            class="velse list-group drop-zone receive-zone"
             v-bind="dragOptions"
             @start="isDragging = true"
             @end="isDragging = false"
             >
             <template #item="{element, index}">
                 <li class="drag-el list-group-item">
+                <div class="item_details">
                   <i
-              :class="
-                element.fixed ? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'
-              "
+              :class="element.fixed ? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'"
               @click="element.fixed = !element.fixed"
               aria-hidden="true"
             ></i>
@@ -99,14 +105,15 @@
                   <input type="number" min="1" class="form-control" v-model="element.text" />
 
                   <i class="fa fa-times close" @click="removeAt(index)"></i>
-                
+                </div>
+
                 </li>
                 </template>
                 
               </draggable>
 
 
-              <form >
+              <form>
                 <input 
                 type="range" 
                 id="range" 
@@ -114,13 +121,14 @@
                 min="0" 
                 max="100" 
                 v-model="vok" 
-                @change="vok==100 ? finish() :handleMouseMove() "
+                @change="vok==100 ? finish() : '' "
                 >
                 <br>
                 <label 
                 for="ok"
                 id="range-value"
-                >{{ vok==0 ? "slide to unlock" : vok==100 ? "terminado" : vok }}</label>
+                :style="{color: vok==100 ? 'green' : 'red'}"
+                >{{ vok==0 ? "slide to validate" : vok==100 ? "validate" : vok }}</label>
               </form>
               
 
@@ -218,29 +226,14 @@ export default {
         console.log(this.items);
       },
       workflowLog() {
-        console.log(this.workflow);
+        console.log("index worflows : ", this.workflow);
       },
-      removeAt(idx) {
-      this.list.splice(idx, 1);
+      removeAt(index) {
+      this.list.splice(index, 1);
     },
     finish() {
       console.log('terminado');
-    },
-    handleMouseMove() {
-      const rangeValueElement = document.querySelector("#range-value")
-      const inputElement = document.querySelector('input[type="range"]')
-      const fillAreaElement = document.querySelector(".fill-area")
-      
-      const hueRotate = "hue-rotate(" + this.vok + "deg)"
-      
-      rangeValueElement.textContent = this.vok
-      rangeValueElement.style.filter = hueRotate
-      
-      inputElement.style.filter = hueRotate
-      
-      fillAreaElement.style.left = this.vok + "vw"
-      fillAreaElement.style.width = (100-this.vok) + "vw"
-      fillAreaElement.style.filter = hueRotate
+      this.vok = 0;
     },
 
     // function to convert image to webp
@@ -258,6 +251,12 @@ export default {
 
   },
     computed: {
+      workflowModel() {
+        if (this.workflow !== '') {
+          return this.workflows[this.workflow].tasks;
+        }
+        return null;
+      },
       dragOptions() {
       return {
         animation: 500,
@@ -279,6 +278,10 @@ export default {
 </script>
 
 <style scoped>
+
+/* ----------------- */
+/* draggable element */
+/* ----------------- */
 .drop-zone {
     background-color: #eee;
     margin-bottom: 10px;
@@ -367,6 +370,16 @@ li[draggable="true"] {
 }
 
 
+.form-control{
+  width: 100%;
+  border: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #000;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
 
 
 i.close {
@@ -396,6 +409,13 @@ i.close {
   min-height: 20px;
 }
 
+.handle{
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+}
+
 
 
 .sortable-chosen.sortable-ghost {
@@ -404,6 +424,35 @@ i.close {
   cursor: grabbing;
 }
 
+.item_details{
+  width: 80%;
+  margin-left: 1.5rem;
+}
+
+/* workflow */
+.worflow{
+  width: 100%;
+  text-align: center;
+  font-weight: 600;
+}
+
+h2.worflow{
+  font-size: 1.5rem;
+}
+p.worflow{
+  
+}
+
+
+
+
+
+
+
+
+/* ---------------- */
+/* range validation */
+/* ---------------- */
 label {
   position: static;
   width: 100px;
