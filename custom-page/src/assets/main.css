@@ -47,7 +47,6 @@ main {
   flex-grow: 1;
   flex-basis: auto;
   flex-shrink: 0;
-  padding: 0 1rem;
 }
 
 footer {

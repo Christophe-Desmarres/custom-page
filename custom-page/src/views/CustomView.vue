@@ -29,7 +29,6 @@
         <div class="custom__content">
 
 
-
             <draggable 
               class="list-group drop-zone action-zone"
               tag="ul"
@@ -102,7 +101,7 @@
                   {{ index }} 
                   <i class="fa fa-align-justify handle"></i>
                   {{element.title}} 
-                  <input type="number" min="1" class="form-control" v-model="element.text" />
+                  <input type="number" min="1" class="form-control" placeholder="Veuillez saisir un délai" v-model="element.text" />
 
                   <i class="fa fa-times close" @click="removeAt(index)"></i>
                 </div>
@@ -113,7 +112,7 @@
               </draggable>
 
 
-              <form>
+              <form id="validate">
                 <input 
                 type="range" 
                 id="range" 
@@ -282,10 +281,18 @@ export default {
 /* ----------------- */
 /* draggable element */
 /* ----------------- */
+
+.custom__content{
+  width: 100%;
+}
+
+*{
+  box-shadow: inset 0 0 0 1px #42b983;
+}
+
 .drop-zone {
     background-color: #eee;
     margin-bottom: 10px;
-    padding: 10px;
 }
 .symbol {
     float: left;
@@ -293,14 +300,14 @@ export default {
     font-size: 2rem;
 }
 .action-zone {
-    width: 20%;
-    height: 600px;
+    width: 30%;
     float: left;
+    height: 100%;
 }
 .receive-zone {
     width: 70%;
-    height: 600px;
     float: right;
+    height: 600px;
 }
 .drag-el {
   background-color: #fff;
@@ -373,8 +380,7 @@ li[draggable="true"] {
 .form-control{
   width: 100%;
   border: 0;
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-size: 1rem;
   color: #000;
   padding: 0;
   margin: 0;
@@ -453,6 +459,10 @@ p.worflow{
 /* ---------------- */
 /* range validation */
 /* ---------------- */
+#validate{
+  clear: both;
+  margin: 1rem auto;
+}
 label {
   position: static;
   width: 100px;
