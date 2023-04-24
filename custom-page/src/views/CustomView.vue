@@ -2,31 +2,57 @@
     <div class="custom">
         <h1>Custom</h1>
 
+      <div class="selection">
+        <select class="choose__select" v-model="client">
+          <option disabled value="">Choose your client</option>
+          <option v-for="client in clients" :key="client.id" :value="client.id">
+            {{ client.name }} {{ client.lastname}}
+          </option>
+        </select>
+        <div id="chevrons">
+          <i class="fas fa-chevron-up"></i>
+          <i class="fas fa-chevron-down"></i>
+      </div>
+      </div>
 
-      <select v-model="client">
-        <option disabled value="">Choose your client</option>
-        <option v-for="client in clients" :key="client.id" :value="client.id">
-          {{ client.name }} {{ client.lastname}}
-        </option>
-      </select>
-
-      <select v-model="prestation">
+      <div class="selection">
+      <select class="choose__select" v-model="prestation">
         <option disabled value="">Choose your prestation</option>
         <option v-for="prestation in prestations" :key="prestation.id" :value="prestation.id">
           {{ prestation.name }}
         </option>
       </select>
+      <div id="chevrons">
+          <i class="fas fa-chevron-up"></i>
+          <i class="fas fa-chevron-down"></i>
+      </div>
+      </div>
 
-      <select v-model="workflow" @change="workflowLog">
+      <div class="selection">
+
+      <select class="choose__select" v-model="workflow" @change="workflowLog">
         <option disabled value="">Choose your workflow</option>
         <option v-for="workflow in workflows" :key="workflow.id" :value="workflow.id">
           {{ workflow.name }}
         </option>
         <option value="">none</option>
       </select>
+      <div id="chevrons">
+          <i class="fas fa-chevron-up"></i>
+          <i class="fas fa-chevron-down"></i>
+      </div>
+      </div>
         
 
         <div class="custom__content">
+
+
+          <div
+            v-if="workflowModel"
+            >
+              <h2 class="worflow">{{ workflows[workflow].name }} </h2>
+              <p class="worflow">{{ workflows[workflow].description }} </p>
+          </div>
 
 
             <draggable 
@@ -51,9 +77,7 @@
             <div
             v-if="workflowModel"
             >
-              <h2 class="worflow">{{ workflows[workflow].name }} </h2>
-              <p class="worflow">{{ workflows[workflow].description }} </p>
-            
+
             <draggable
             tag="ul"
             item-key="id"
@@ -278,16 +302,98 @@ export default {
 
 <style scoped>
 
+h1{
+  font-size: 2rem;
+  font-weight: bold;
+  color: #42b983;
+  text-align: center;
+}
+
 /* ----------------- */
 /* draggable element */
 /* ----------------- */
 
-.custom__content{
-  width: 100%;
+*:focus {
+  outline: none;
 }
 
-*{
-  box-shadow: inset 0 0 0 1px #42b983;
+select{
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: transparent;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #777;
+  cursor: pointer;
+}
+
+
+
+.choose__select {
+  display: block;
+  margin: 1rem 0 1rem 1rem;
+  border-radius: 0.25em;
+  padding: 0.25em 0.5em;
+  cursor: pointer;
+  line-height: 1.1;
+  background-color: #fff;
+  background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
+}
+
+.selection{
+  position: relative;
+  width: 40%;
+}
+
+#chevrons {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 12px;
+  padding: 9px;
+}
+
+#chevrons i {
+  display: block;
+  height: 50%;
+  color: #d1dede;
+  font-size: 0.8rem;
+}
+
+
+@media screen and (max-width: 768px) {
+  .selection{
+    width: 70%;
+    margin: auto;
+  }
+  .choose__select{
+    font-size: 1.25rem;
+    line-height: 2;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  select{
+  }
+  .selection{
+    width: 100%;
+    margin: auto;
+  }
+  .choose__select{
+    font-size: 1rem;
+    line-height: 2;
+    margin: 1rem 0 1rem 0;
+  }
+}
+
+
+
+.custom__content{
+
+  width: 100%;
 }
 
 .drop-zone {
@@ -305,9 +411,9 @@ export default {
     height: 100%;
 }
 .receive-zone {
-    width: 70%;
+    width: 65%;
     float: right;
-    height: 600px;
+    height: 500px;
 }
 .drag-el {
   background-color: #fff;
@@ -437,9 +543,11 @@ i.close {
 
 /* workflow */
 .worflow{
-  width: 100%;
+  width: auto;
   text-align: center;
+  color: #42b983;
   font-weight: 600;
+  margin: 1rem;
 }
 
 h2.worflow{

@@ -22,15 +22,19 @@ export default {
 <style scoped>
 header {
   line-height: 1.5;
+  box-shadow: 0 2px 5px #333;
+  z-index: 100;
+  margin-bottom: 1rem;
 }
 
 
 nav {
-  width: 100%;
+  width: auto;
   font-size: 1.2rem;
   font-weight: 600;
   text-align: center;
-  margin-top: 1rem;
+  padding: 1rem;
+  background: #fff;
 }
 
 nav a.router-link-exact-active {
