@@ -37,6 +37,8 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  background-color: #f3f9f9;
 }
 
 header {
@@ -47,6 +49,11 @@ main {
   flex-grow: 1;
   flex-basis: auto;
   flex-shrink: 0;
+
+  background-color: #f3f9f9;
+  padding: 0 1rem;
+
+
 }
 
 footer {

@@ -1,6 +1,5 @@
 <script setup>
 import TheWelcome from '../components/TheWelcome.vue'
-import background from '../assets/images/mer.jpg';
 
 </script>
 
@@ -8,7 +7,7 @@ import background from '../assets/images/mer.jpg';
 <div class="home">
 
     <TheWelcome />
-    <div id="cover" :style="{backgroundImage:`url(${background})`}"></div>   
+    <div id="cover"></div>   
  
     <div class="description">   
         <p>
@@ -68,12 +67,13 @@ em{
     top: 0;
     width: 100vw;
     height: 100%;
-    z-index: -1;
+    /* z-index: 0; */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
     animation: mymove 5s infinite;
+    background-image: url('../assets/images/mer.jpg');
 
 }
 

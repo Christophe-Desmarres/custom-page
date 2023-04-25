@@ -20,6 +20,7 @@ footer {
     background-color: var(--color-background-reverse);
     padding: 1rem;
     text-align: center;
+    z-index: 100;
 }
 
 footer a {

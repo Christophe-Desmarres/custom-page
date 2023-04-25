@@ -47,13 +47,29 @@
         <div class="custom__content">
 
 
-          <div
-            v-if="workflowModel"
-            >
+          <div v-if="workflowModel">
               <h2 class="worflow">{{ workflows[workflow].name }} </h2>
               <p class="worflow">{{ workflows[workflow].description }} </p>
           </div>
 
+          <div class="add__item">
+              <i class="fa-solid fa-circle-plus" @click="add"></i>
+              <input type="text" placeholder="add an action" v-model="newItem" @keyup.enter="add">
+          </div>
+
+          <div class="date">
+
+            <label class="date__label" for="startDate">
+              Date de début
+              <input class="date__input" type="date" name="startDate" v-model="startDate">
+            </label>
+
+            <label class="date__label" for="endDate">
+              Date de fin
+              <input class="date__input" type="date" name="endDate" v-model="endDate">
+            </label>
+
+          </div>
 
             <draggable 
               class="list-group drop-zone action-zone"
@@ -65,14 +81,27 @@
               @change="log"
               >
               <template #item="{element}">
-                <li class="drag-el list-group-item ">
+
+                <draggable-element :dragelmt="element" />
+
+              </template>
+                <!-- <li class="drag-el list-group-item ">
                   <div class="item_details">
                     <i class="fa fa-align-justify handle"></i>
-                    {{element.title}}
+                    <input type="text" :value="element.title">
                   </div>
-                </li>
-              </template>
+                </li> -->
+
+
             </draggable>
+
+            <!-- <div class="drag-el list-group-item ">
+              <div class="item_details">
+                <i class="fa-solid fa-circle-plus"></i>
+                <p>Ajoute une action</p>
+                <input type="text" placeholder="add an action">
+                  </div>
+                </div> -->
 
             <div
             v-if="workflowModel"
@@ -150,6 +179,7 @@
                 <label 
                 for="ok"
                 id="range-value"
+                class="validate__label"
                 :style="{color: vok==100 ? 'green' : 'red'}"
                 >{{ vok==0 ? "slide to validate" : vok==100 ? "validate" : vok }}</label>
               </form>
@@ -211,6 +241,7 @@
 import draggable from 'vuedraggable';
 import logo from '../assets/images/logo400px.png';
 import dbData from '../data/data.json';
+import DraggableElement from '../components/DraggableElement.vue';
 
 
 // source : https://learnvue.co/articles/vue-drag-and-drop
@@ -220,7 +251,8 @@ import dbData from '../data/data.json';
 export default {
     name: 'Custom',
     components: {
-            draggable,
+        draggable,
+        DraggableElement,
         },
     display: "Transition",
     order: 6,
@@ -242,6 +274,7 @@ export default {
       list: [],
       nestList: [],
       vok: 0,
+      newItem: '',
     }
   },
     methods: {
@@ -258,6 +291,21 @@ export default {
       console.log('terminado');
       this.vok = 0;
     },
+    add() {
+      console.log('add tpl');
+      console.log(this.items.length);
+      if (this.newItem === '') return;
+        this.items.push({ 
+          "id": this.items.length,
+          "title": this.newItem,
+          "text": "",
+          "delay":0,
+          "list": 1,
+          "order": 9
+        });
+        this.newItem = '';
+      },
+
 
     // function to convert image to webp
     convertToWebp() {
@@ -310,7 +358,7 @@ h1{
 }
 
 /* ----------------- */
-/* draggable element */
+/* selection element */
 /* ----------------- */
 
 *:focus {
@@ -391,10 +439,69 @@ select{
 
 
 
+/* ------------- */
+/* action button */
+/* ------------- */
+
 .custom__content{
 
   width: 100%;
 }
+
+.add__item{
+  width: 100%;
+  margin: 1rem 0;
+  padding: 5px;
+  position: relative;
+}
+
+.fa-circle-plus{
+  color: #42b983;
+  font-size: 1.5rem;
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+}
+.add__item input{
+  margin-left: 2rem;
+  background-color: transparent;
+  font-size: 1.25rem;
+  border-radius: 5px;
+  font-weight: bold;
+  color: #777;
+  cursor: pointer;
+}
+
+.date{
+  margin: 1rem 0;
+  padding: 5px;
+}
+
+.date__label{
+  width: 70%;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #777;
+}
+.date__input{
+  display: block;
+  width: 40%;
+  margin: 1rem 0;
+  padding: 5px;
+  background-color: transparent;
+  font-size: 1.25rem;
+  border-radius: 5px;
+  font-weight: bold;
+  color: #777;
+  cursor: pointer;
+}
+
+
+
+/* ----------------- */
+/* draggable element */
+/* ----------------- */
 
 .drop-zone {
     background-color: #eee;
@@ -571,7 +678,8 @@ p.worflow{
   clear: both;
   margin: 1rem auto;
 }
-label {
+
+.validate__label {
   position: static;
   width: 100px;
   z-index: 1;

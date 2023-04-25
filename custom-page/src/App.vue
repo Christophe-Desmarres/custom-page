@@ -34,19 +34,9 @@ export default {
         this.load = true
       })
   }
-
 }
-
-
 </script>
 
 
 <style scoped>
-#app {
-  background-color: #f3f9f9;
-}
-
-main{
-  padding: 0 1rem;
-}
 </style>

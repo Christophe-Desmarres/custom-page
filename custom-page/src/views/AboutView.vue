@@ -46,7 +46,6 @@
 </template>
 
 <style scoped>
-
  .about {
     width: 70%;
     padding: 2rem;
