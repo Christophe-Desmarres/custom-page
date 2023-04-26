@@ -1,14 +1,15 @@
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue'
+import HelloWorld from '../components/HelloWorld.vue';
 
 </script>
 
 <template>
 <div class="home">
 
-    <TheWelcome />
     <div id="cover"></div>   
- 
+
+    <hello-world msg="Bienvenue" class="titre"/>
+   
     <div class="description">   
         <p>
             <q>
@@ -32,6 +33,32 @@ import TheWelcome from '../components/TheWelcome.vue'
 <style scoped>
 
 
+
+#cover {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    animation: mymove 5s infinite;
+    background-image: url('../assets/images/mer.jpg');
+}
+
+@keyframes mymove {
+  50% {
+    scale: 1.02;
+}
+}
+
+.titre {
+  height: 1.5em;
+  margin: 2rem auto;
+  mix-blend-mode: multiply;
+}
 .description{
     width: 80%;
     margin: 0 auto 2rem;
@@ -59,28 +86,6 @@ q::after{
 
 em{
     font-style: italic;
-}
-
-#cover {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100vw;
-    height: 100%;
-    /* z-index: 0; */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    animation: mymove 5s infinite;
-    background-image: url('../assets/images/mer.jpg');
-
-}
-
-@keyframes mymove {
-  50% {
-    scale: 1.02;
-}
 }
 
 

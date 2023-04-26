@@ -48,28 +48,27 @@
 
 
           <div v-if="workflowModel">
+              <p class="workflow">Workflow choisi : </p>
               <h2 class="worflow">{{ workflows[workflow].name }} </h2>
               <p class="worflow">{{ workflows[workflow].description }} </p>
           </div>
+
+          
+          <div class="date">
+            <label class="date__label" for="startDate">Date de début</label>
+            <input class="date__input" type="date" name="startDate" v-model="startDate">
+          </div>
+          <div class="date">
+            <label class="date__label" for="endDate">Date de fin</label>
+            <input class="date__input" type="date" name="endDate" v-model="endDate">
+          </div>
+
 
           <div class="add__item">
               <i class="fa-solid fa-circle-plus" @click="add"></i>
               <input type="text" placeholder="add an action" v-model="newItem" @keyup.enter="add">
           </div>
 
-          <div class="date">
-
-            <label class="date__label" for="startDate">
-              Date de début
-              <input class="date__input" type="date" name="startDate" v-model="startDate">
-            </label>
-
-            <label class="date__label" for="endDate">
-              Date de fin
-              <input class="date__input" type="date" name="endDate" v-model="endDate">
-            </label>
-
-          </div>
 
             <draggable 
               class="list-group drop-zone action-zone"
@@ -80,86 +79,92 @@
               :group="{ name: 'actions', pull: 'clone', put: false }"
               @change="log"
               >
-              <template #item="{element}">
-
-                <draggable-element :dragelmt="element" />
-
-              </template>
-                <!-- <li class="drag-el list-group-item ">
-                  <div class="item_details">
-                    <i class="fa fa-align-justify handle"></i>
-                    <input type="text" :value="element.title">
-                  </div>
-                </li> -->
-
-
+                <template #item="{element}">
+                  <draggable-element :dragelmt="element" />
+                </template>
             </draggable>
 
-            <!-- <div class="drag-el list-group-item ">
-              <div class="item_details">
-                <i class="fa-solid fa-circle-plus"></i>
-                <p>Ajoute une action</p>
-                <input type="text" placeholder="add an action">
-                  </div>
-                </div> -->
 
-            <div
-            v-if="workflowModel"
-            >
+            <div v-if="workflowModel" >
+              <draggable
+              tag="ul"
+              item-key="id"
+              v-model="workflowModel"
+              class="vif list-group drop-zone receive-zone"
+              v-bind="dragOptions"
+              @start="isDragging = true"
+              @end="isDragging = false"
+              >
+                <template #item="{element, index}">
+                  <li class="drag-el list-group-item" :aria-label="index">
+                      <i class="fa fa-align-justify handle"></i>
+                      <div class="item_details">
+                      {{items[element.id].title}} 
+                      <p>délai : {{ element.delay }} jours</p>
+                    </div>
+                  </li>
+                </template>
+              </draggable>
+            </div>
+
 
             <draggable
-            tag="ul"
-            item-key="id"
-            v-model="workflowModel"
-            class="vif list-group drop-zone receive-zone"
-            v-bind="dragOptions"
-            @start="isDragging = true"
-            @end="isDragging = false"
-            >
-            
-            
-            <template #item="{element, index}">
-              <li class="drag-el list-group-item" :aria-label="index">
-                  <i class="fa fa-align-justify handle"></i>
-                  <div class="item_details">
-                  {{items[element.id].title}} 
-                  <p>délai : {{ element.delay }} jours</p>
-                </div>
-                </li>
-              </template>
-              
-            </draggable>
-            
-          </div>
-
-
-              <draggable
               v-else
-            tag="ul"
-            item-key="id"
-            v-model="list"
-            class="velse list-group drop-zone receive-zone"
-            v-bind="dragOptions"
-            @start="isDragging = true"
-            @end="isDragging = false"
-            >
-            <template #item="{element, index}">
-                <li class="drag-el list-group-item">
-                <div class="item_details">
-                  <i
-              :class="element.fixed ? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'"
-              @click="element.fixed = !element.fixed"
-              aria-hidden="true"
-            ></i>
-                  {{ index }} 
-                  <i class="fa fa-align-justify handle"></i>
-                  {{element.title}} 
-                  <input type="number" min="1" class="form-control" placeholder="Veuillez saisir un délai" v-model="element.text" />
+              tag="ul"
+              item-key="id"
+              v-model="list"
+              class="velse list-group drop-zone receive-zone"
+              v-bind="dragOptions"
+              @start="isDragging = true"
+              @end="isDragging = false"
+              >
+                <template #item="{element, index}">
+                    <li class="drag-el list-group-item">
+                      <div class="item_details">
+                        <i
+                          :class="element.fixed ? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'"
+                          @click="element.fixed = !element.fixed"
+                          aria-hidden="true"
+                        ></i>
+                        {{ index }} 
+                        <i class="fa fa-align-justify handle"></i>
+                        {{element.title}} 
+                        <input type="number" min="1" class="form-control" placeholder="Veuillez saisir un délai" v-model="element.text" />
 
-                  <i class="fa fa-times close" @click="removeAt(index)"></i>
-                </div>
+                        <i class="fa fa-times close" @click="removeAt(index)"></i>
+                      </div>
+                    </li>
+                </template>
+              </draggable>
 
-                </li>
+
+
+              
+            <draggable
+              tag="canvas"
+              item-key="id"
+              v-model="list"
+              class="velse list-group drop-zone canvas-zone"
+              v-bind="dragOptions"
+              @start="isDragging = true"
+              @end="isDragging = false"
+              >
+                <template #item="{element, index}">
+                  <li class="drag-el list-group-item">
+                    <div class="item_details">
+                      <i
+                        :class="element.fixed ? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'"
+                        @click="element.fixed = !element.fixed"
+                        aria-hidden="true"
+                      ></i>
+                      {{ index }} 
+                      <i class="fa fa-align-justify handle"></i>
+                      {{element.title}} 
+                      <input type="number" min="1" class="form-control" placeholder="Veuillez saisir un délai" v-model="element.text" />
+
+                      <i class="fa fa-times close" @click="removeAt(index)"></i>
+                    </div>
+                  </li>
                 </template>
                 
               </draggable>
@@ -167,64 +172,25 @@
 
               <form id="validate">
                 <input 
-                type="range" 
-                id="range" 
-                name="ok" 
-                min="0" 
-                max="100" 
-                v-model="vok" 
-                @change="vok==100 ? finish() : '' "
+                  type="range" 
+                  id="range" 
+                  name="ok" 
+                  min="0" 
+                  max="100" 
+                  v-model="vok" 
+                  @change="vok==100 ? finish() : '' "
                 >
                 <br>
                 <label 
-                for="ok"
-                id="range-value"
-                class="validate__label"
-                :style="{color: vok==100 ? 'green' : 'red'}"
-                >{{ vok==0 ? "slide to validate" : vok==100 ? "validate" : vok }}</label>
+                  for="ok"
+                  id="range-value"
+                  class="validate__label"
+                  :style="{color: vok==100 ? 'green' : 'red'}"
+                >
+                  {{ vok==0 ? "slide to validate" : vok==100 ? "validate" : vok }}
+                </label>
               </form>
               
-
-<!-- TAB view
-            <div                 
-                class="drop-zone receive-zone"
-                @drop="onDrop($event, 2)"
-                @dragover.prevent
-                @dragenter.prevent>
-                workflow
-
-                <table>
-                    <tr>
-                        <th>check</th>
-                        <th>action</th>
-                        <th>info</th>
-
-                    </tr>
-
-
-
-                    <tr
-                        class="drag-el"
-                        v-for="item in listTwo"
-                        :key="item.title"
-                        draggable="true"
-                        @dragstart="startDrag($event, item)"
-                        >
-                                <td>
-                                    <input type="checkbox" v-model="item.checked">
-                                </td>
-                                <td>
-                                    {{ item.title }}
-                                </td>
-                                <td>
-                                  <div v-for="(info, index) in item.info" :key="info" :value="info">
-                                    {{ clients[client].name }}<br>
-                                    {{ prestations[prestation].name }}<br>
-                                  </div>
-                                </td>
-                          </tr>                
-                        </table>
-            </div> -->
 
 <!-- Logo
             <div class="custom__content__logo">
@@ -249,7 +215,7 @@ import DraggableElement from '../components/DraggableElement.vue';
 // pour aller plus loin : https://www.youtube.com/watch?v=wWKhKPN_Pmw
 
 export default {
-    name: 'Custom',
+    name: 'CustomView',
     components: {
         draggable,
         DraggableElement,
@@ -476,18 +442,21 @@ select{
 .date{
   margin: 1rem 0;
   padding: 5px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .date__label{
-  width: 70%;
+  width: 50%;
   font-size: 1.25rem;
   font-weight: bold;
   color: #777;
 }
 .date__input{
-  display: block;
   width: 40%;
-  margin: 1rem 0;
   padding: 5px;
   background-color: transparent;
   font-size: 1.25rem;
@@ -521,6 +490,14 @@ select{
     width: 65%;
     float: right;
     height: 500px;
+
+}
+
+.canvas-zone{
+  width: 100%;
+  height: 100%;
+  background-color: #f5c748;
+  margin-bottom: 10px;
 }
 .drag-el {
   background-color: #fff;

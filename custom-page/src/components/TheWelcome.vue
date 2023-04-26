@@ -16,9 +16,4 @@ export default {
 </script>
 
 <style scoped>
-
-.logo {
-  height: 1.5em;
-}
-
 </style>
