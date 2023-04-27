@@ -3,7 +3,17 @@
         <h1>CanvasSvgVue</h1>
         <p>CanvasSvgVue</p>
 
-
+      <ul style="color: red;">// TODO
+        <li>- créer des rectangles svg avec texte pour les actions</li>
+        <li>- afficher la liste des actions à gauche</li>
+        <li>- afficher la liste des actions dans le canvas à droite</li>
+        <li>- drag and drop vers le canvas</li>
+        <li>- fct lors du focus</li>
+        <li>- fct lors du drag</li>
+        <li>- fct lors du mvt</li>
+        <li>- fct lors du drop</li>
+        <li>- créer des actions perso</li>
+      </ul>
 
         
         <draggable 
