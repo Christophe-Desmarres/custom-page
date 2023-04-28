@@ -1,14 +1,14 @@
 <template>
-  <div>
+  <svg>
 
     <rect 
       fill-opacity="0" 
       x="12" 
       y="64" 
       height="56" 
-      width="149.40740585327148">
+      width="149.40740585327148"
+      >
     </rect>
-
     
 
     <g 
@@ -61,7 +61,7 @@
         dy="0" 
         x="19.571758270263672"
         transform="translate(8, 24) ">
-        move
+        {{ msg }}
       </text>
       <path 
         class="blocklyPath" 
@@ -78,7 +78,7 @@
         steps
       </text>
     </g>
-  </div>
+  </svg>
 </template>
 
 <script>

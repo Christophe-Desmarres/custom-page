@@ -15,6 +15,8 @@
         <li>- créer des actions perso</li>
       </ul>
 
+      <custom-block msg="Custom" />
+
         
         <draggable 
               class="list-group drop-zone action-zone"
@@ -32,32 +34,37 @@
 
         
         <draggable
-              tag="canvas"
+              tag="ul"
               item-key="id"
-              v-model="list"
-              class="velse list-group drop-zone canvas-zone"
+              v-model="items"
+              class="velse list-group drop-zone receive-zone"
               v-bind="dragOptions"
               @start="isDragging = true"
               @end="isDragging = false"
               >
                 <template #item="{element, index}">
-                  <li class="drag-el list-group-item">
-                    <div class="item_details">
-                      <i
-                        :class="element.fixed ? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'"
-                        @click="element.fixed = !element.fixed"
-                        aria-hidden="true"
-                      ></i>
-                      {{ index }} 
-                      <i class="fa fa-align-justify handle"></i>
-                      {{element.title}} 
-                    </div>
-                  </li>
+                  <li>
+                  <svg height="30" width="auto">
+                    <text 
+                      y="12" 
+                      x="0"
+                      >
+                      {{ index }} - {{ element.title }}
+                    </text>
+                  </svg>
+                </li>
                 </template>
                 
               </draggable>
 
               <!-- <draggable-element /> -->
+
+              <canvas class="canvas-zone">
+
+              </canvas>
+
+
+
 
     </div>
 </template>
@@ -66,12 +73,14 @@
 import draggable from 'vuedraggable';
 import DraggableElement from '../components/DraggableElement.vue';
 import dbData from '../data/data.json';
+import CustomBlock from '../components/CustomBlock.vue';
 
 export default {
     name: 'CanvasSvgView',
     components: {
         draggable,
         DraggableElement,
+        CustomBlock,
         },
     data() {
         return {
@@ -79,7 +88,7 @@ export default {
         items: dbData.items,
         prestations: dbData.prestations,
         workflows: dbData.workflows,
-        list: [],
+        list: this.items,
 
         }
     },
@@ -87,6 +96,14 @@ export default {
     methods: {
       log() {
         console.log(this.items);
+      },
+      // to create text canvas
+      createText(index) {
+        console.log(index);
+        // var canvas = document.getElementById("myCanvas");
+        // var ctx = canvas.getContext("2d");
+        // ctx.font = "30px Arial";
+        // ctx.strokeText("Hello World",10,50);
       },
     },
     computed: {
@@ -106,9 +123,17 @@ export default {
 
 .canvas-zone{
   width: 100%;
-  height: 100%;
+  /* background-color: #f5c748; */
+  box-shadow: 0 0 3px #333;
+  margin: 1rem 0;
+  position: relative;
+}
+
+svg{
   background-color: #f5c748;
+  box-shadow: 0 0 3px #333;
   margin-bottom: 10px;
+  height: fit-content;
 }
 
 </style>
