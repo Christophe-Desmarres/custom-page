@@ -3,7 +3,7 @@
 
         <div class="item_details">
         <i class="fa fa-align-justify handle"></i>
-        {{dragelmt.title}}
+        {{dragelmt.name}}
         </div>
     </li>
 </template>

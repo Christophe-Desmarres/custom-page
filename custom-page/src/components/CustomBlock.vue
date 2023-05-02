@@ -31,14 +31,14 @@
         data-argument-type="text number" 
         data-shapes="argument round"
         transform="translate(55.143516540527344,8)">
-        <path 
+        <!-- <path 
           class="blocklyPath blocklyBlockBackground" 
           stroke="#3373CC" 
           fill="#FFFFFF" 
           fill-opacity="1"
           d="m 0,0 m 16,0 H 24 a 16 16 0 0 1 0 32 H 16 a 16 16 0 0 1 0 -32 z">
-        </path>
-        <g 
+        </path> -->
+        <!-- <g 
           class="blocklyEditableText" 
           transform="translate(8, 0) " 
           style="cursor: text;">
@@ -51,7 +51,7 @@
             text-anchor="middle">
             10
           </text>
-        </g>
+        </g> -->
       </g>
       <text 
         class="blocklyText" 
@@ -63,7 +63,7 @@
         transform="translate(8, 24) ">
         {{ msg }}
       </text>
-      <path 
+      <!-- <path 
         class="blocklyPath" 
         style="visibility: hidden" 
         d="" 
@@ -76,7 +76,7 @@
         x="19.13194465637207"
         transform="translate(103.14351654052734, 24) ">
         steps
-      </text>
+      </text> -->
     </g>
   </svg>
 </template>

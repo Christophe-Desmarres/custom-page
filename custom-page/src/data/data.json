@@ -96,7 +96,8 @@
   "items": [
     {
       "id": 0,
-      "title": "Répondre demande de contact",
+      "type":"items",
+      "name": "Répondre demande de contact",
       "text":"",
       "delay":0,
       "actions": ["enregistrer client", "enregistrer prestation"],
@@ -106,7 +107,8 @@
     },
     {
       "id": 1,
-      "title": "Relance demande de contact",
+      "type":"items",
+      "name": "Relance demande de contact",
       "text":"",
       "delay":0,
       "actions": [],
@@ -116,7 +118,8 @@
     },
     {
       "id": 2,
-      "title": "Répondre prise de rendez vous",
+      "type":"items",
+      "name": "Répondre prise de rendez vous",
       "text":"",
       "delay":0,
       "list": 1,
@@ -124,7 +127,8 @@
     },
     {
       "id": 3,
-      "title": "inscription client",
+      "type":"items",
+      "name": "inscription client",
       "text":"",
       "delay":0,
       "list": 1,
@@ -132,7 +136,8 @@
     },
     {
       "id": 4,
-      "title": "Réaliser un devis",
+      "type":"items",
+      "name": "Réaliser un devis",
       "text":"",
       "delay":0,
       "list": 1,
@@ -140,7 +145,8 @@
     },
     {
       "id": 5,
-      "title": "Relance après devis",
+      "type":"items",
+      "name": "Relance après devis",
       "text":"",
       "delay":0,
       "list": 1,
@@ -148,7 +154,8 @@
     },
     {
       "id": 6,
-      "title": "Prise rendez vous signature",
+      "type":"items",
+      "name": "Prise rendez vous signature",
       "text":"",
       "delay":0,
       "list": 1,
@@ -156,7 +163,8 @@
     },
     {
       "id": 7,
-      "title": "Rappel avant prestation",
+      "type":"items",
+      "name": "Rappel avant prestation",
       "text":"",
       "delay":0,
       "list": 1,
@@ -164,7 +172,8 @@
     },
     {
       "id": 8,
-      "title": "Prestation",
+      "type":"items",
+      "name": "Prestation",
       "text":"",
       "delay":0,
       "list": 1,
@@ -237,5 +246,27 @@
         {"id":6, "delay":"7"}
       ]
     }    
+  ],
+  "times":[
+    {"id":0, "type":"times", "name":"minutes", "value":"", "reference":1},
+    {"id":1, "type":"times", "name":"heures", "value":"", "reference":60},
+    {"id":2, "type":"times", "name":"jours", "value":"", "reference":1440},
+    {"id":3, "type":"times", "name":"semaines", "value":"", "reference":10080},
+    {"id":4, "type":"times", "name":"mois", "value":"", "reference":43800},
+    {"id":5, "type":"times", "name":"années", "value":"", "reference":525600}
+  ],
+  "conditions":[
+    {"id":0,  "type":"conditions", "name":"après", "value":1},
+    {"id":1,  "type":"conditions", "name":"avant", "value":2},
+    {"id":2,  "type":"conditions", "name":"après ou égal", "value":3},
+    {"id":3,  "type":"conditions", "name":"avant ou égal", "value":4},
+    {"id":4,  "type":"conditions", "name":"égal", "value":5},
+    {"id":5,  "type":"conditions", "name":"différent", "value":6},
+    {"id":6,  "type":"conditions", "name":"contient", "value":7},
+    {"id":7,  "type":"conditions", "name":"ne contient pas", "value":8},
+    {"id":8,  "type":"conditions", "name":"est vide", "value":9},
+    {"id":9,  "type":"conditions", "name":"n'est pas vide", "value":10},
+    {"id":10, "type" :"conditions", "name":"est dans la liste", "value":11},
+    {"id":11, "type" :"conditions", "name":"n'est pas dans la liste", "value":12}    
   ]
 }

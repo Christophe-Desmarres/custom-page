@@ -16,7 +16,18 @@
       </ul>
 
       <custom-block msg="Custom" />
-      <custom-block msg="Test" />
+
+            <div>Picked: {{ type }}</div>
+
+      <input type="radio" id="actions" value="actions" v-model="type" />
+      <label for="actions">actions</label>
+
+      <input type="radio" id="times" value="times" v-model="type" />
+      <label for="times">times</label>
+
+      <input type="radio" id="conditions" value="conditions" v-model="type" />
+      <label for="conditions">conditions</label>
+
 
 
       <div class="dragdrop-zone">
@@ -27,10 +38,11 @@
 
         <draggable 
               class="list-group drop-zone action-zone"
+              :class="type === 'conditions' ? 'conditions' : (type === 'times') ? 'times' :  'items' "
               tag="ul"
               item-key="id"
-              v-model="items" 
-              :list="items"
+              v-model="type" 
+              :list="((type=== 'conditions') ? conditions : (type === 'times') ? times :  items )"
               :group="{ name: 'actions', pull: 'clone', put: false }"
               @change="log"
               >
@@ -38,6 +50,8 @@
                   <draggable-element :dragelmt="element" />
                 </template>
             </draggable>
+
+            
 
           </div>
             <div class="zone">
@@ -55,13 +69,13 @@
               >
 
                 <template #item="{element, index}">
-                  <li>
+                  <li :class="element.type">
                   <svg height="30" width="auto">
                     <text 
                       y="20" 
                       x="10"
                       >
-                      {{ index }} - {{ element.title }}
+                      {{ index }} - {{ element.name }}
                     </text>
                   </svg>
                 </li>
@@ -84,6 +98,8 @@
 </template>
 
 <script>
+// à creuser
+// source : https://codepen.io/unicurva/pen/MbRYqg?editors=0110
 import draggable from 'vuedraggable';
 import DraggableElement from '../components/DraggableElement.vue';
 import dbData from '../data/data.json';
@@ -102,8 +118,10 @@ export default {
         items: dbData.items,
         prestations: dbData.prestations,
         workflows: dbData.workflows,
+        times: dbData.times,
+        conditions: dbData.conditions,
         list: '',
-
+        type: '',
         }
     },
     
@@ -134,6 +152,15 @@ export default {
 </script>
 
 <style scoped>
+
+#selected_element{
+  width: 75%;
+  display: block;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  background-color: #fff;
+  box-shadow: 0 0 3px #333;
+}
 
 .dragdrop-zone{
   width: 100%;
@@ -167,7 +194,7 @@ export default {
 }
 .canvas-zone{
   width: 50%;
-  background-color: #f5c748;
+  background-color: #f5c74830;
   box-shadow: 0 0 3px #333;
   margin: 1rem 0;
   position: relative;
@@ -192,11 +219,18 @@ export default {
 
 
 svg{
-  background-color: #f5c748;
   box-shadow: 0 0 3px #333;
   margin: 0.3rem 0;
   height: fit-content;
 }
+.action{
+  background-color: #f5c748;
+}
+
+.time{
+  background-color: #00bd7e;
+}
+
 
 svg:hover{
   cursor: grab;
