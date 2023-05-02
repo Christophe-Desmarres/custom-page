@@ -3,21 +3,28 @@
         <h1>CanvasSvgVue</h1>
         <p>CanvasSvgVue</p>
 
-      <ul style="color: red;">// TODO
-        <li>- créer des rectangles svg avec texte pour les actions</li>
-        <li>- afficher la liste des actions à gauche</li>
-        <li>- afficher la liste des actions dans le canvas à droite</li>
-        <li>- drag and drop vers le canvas</li>
-        <li>- fct lors du focus</li>
-        <li>- fct lors du drag</li>
-        <li>- fct lors du mvt</li>
-        <li>- fct lors du drop</li>
-        <li>- créer des actions perso</li>
+      <ul style="color: red;marginBottom:2rem;">// TODO
+        <li><input type="checkbox" checked> créer des rectangles svg avec texte pour les actions</li>
+        <li><input type="checkbox"> afficher la liste des actions à gauche</li>
+        <li><input type="checkbox"> afficher la liste des actions dans le canvas à droite</li>
+        <li><input type="checkbox"> drag and drop vers le canvas</li>
+        <li><input type="checkbox"> fct lors du focus</li>
+        <li><input type="checkbox"> fct lors du drag</li>
+        <li><input type="checkbox"> fct lors du mvt</li>
+        <li><input type="checkbox"> fct lors du drop</li>
+        <li><input type="checkbox"> créer des actions perso</li>
       </ul>
 
       <custom-block msg="Custom" />
+      <custom-block msg="Test" />
+
+
+      <div class="dragdrop-zone">
 
         
+        <div class="zone">
+      <p class="drop-title">Drag in this list</p>
+
         <draggable 
               class="list-group drop-zone action-zone"
               tag="ul"
@@ -32,22 +39,27 @@
                 </template>
             </draggable>
 
-        
+          </div>
+            <div class="zone">
+
+            <p class="drop-title">Drop in this box</p>
+
         <draggable
               tag="ul"
               item-key="id"
-              v-model="items"
-              class="velse list-group drop-zone receive-zone"
+              v-model="list"
+              class="velse svg-zone list-group drop-zone receive-zone"
               v-bind="dragOptions"
               @start="isDragging = true"
               @end="isDragging = false"
               >
+
                 <template #item="{element, index}">
                   <li>
                   <svg height="30" width="auto">
                     <text 
-                      y="12" 
-                      x="0"
+                      y="20" 
+                      x="10"
                       >
                       {{ index }} - {{ element.title }}
                     </text>
@@ -56,6 +68,8 @@
                 </template>
                 
               </draggable>
+            </div>
+              </div>
 
               <!-- <draggable-element /> -->
 
@@ -88,7 +102,7 @@ export default {
         items: dbData.items,
         prestations: dbData.prestations,
         workflows: dbData.workflows,
-        list: this.items,
+        list: '',
 
         }
     },
@@ -121,19 +135,79 @@ export default {
 
 <style scoped>
 
-.canvas-zone{
+.dragdrop-zone{
   width: 100%;
-  /* background-color: #f5c748; */
+  box-shadow: 0 0 3px #333;
+  margin: 1rem 0;
+  display: flex;
+  user-select: none;
+}
+
+.zone{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.action-zone{
+  width: 75%;
+  background-color: #f5c74830;
+  box-shadow: 0 0 3px #333;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  position: relative;
+}
+.action-zone li{
+  list-style: none;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  background-color: #fff;
+  box-shadow: 0 0 3px #333;
+  cursor: grab;
+}
+.canvas-zone{
+  width: 50%;
+  background-color: #f5c748;
   box-shadow: 0 0 3px #333;
   margin: 1rem 0;
   position: relative;
 }
 
+.drop-title{
+  width: 50%;
+
+  font-weight: 600;
+  text-align: center;
+  margin: 1rem 0;
+}
+.svg-zone{
+  width: 75%;
+  min-height: 2rem;
+  background-color: #f5c74830;
+  box-shadow: 0 0 3px #333;
+  margin: 1rem 0;
+  padding: 0.5rem;
+  position: relative;
+}
+
+
 svg{
   background-color: #f5c748;
   box-shadow: 0 0 3px #333;
-  margin-bottom: 10px;
+  margin: 0.3rem 0;
   height: fit-content;
+}
+
+svg:hover{
+  cursor: grab;
+}
+
+svg:active{
+  cursor: grabbing;
+}
+
+svg:focus{
+  cursor: grabbing;
 }
 
 </style>
