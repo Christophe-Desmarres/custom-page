@@ -4,9 +4,9 @@
         <p>CanvasSvgVue</p>
 
       <ul style="color: red;marginBottom:2rem;">// TODO
-        <li><input type="checkbox" checked> créer des rectangles svg avec texte pour les actions</li>
+        <li><input type="checkbox" checked> créer des rectangles avec texte pour les actions</li>
         <li><input type="checkbox" checked> créer des types (actions, temps, conditions)</li>
-        <li><input type="checkbox"> créer des formes pour chaque type (actions, temps, conditions)</li>
+        <li><input type="checkbox" checked> créer des formes pour chaque type (actions, temps, conditions)</li>
         <li><input type="checkbox" checked> afficher la liste des actions à gauche</li>
         <li><input type="checkbox" checked> afficher la liste des actions dans le "canvas" à droite</li>
         <li><input type="checkbox" checked> drag and drop vers le "canvas"</li>
@@ -17,10 +17,7 @@
         <li><input type="checkbox"> créer des actions perso</li>
       </ul>
 
-      <custom-block msg="Custom" />
-      <ActionElement :dragelmt="items[0]" />
-
-            <div>Picked: {{ type }}</div>
+      <custom-block msg="Custom bloc" />
 
       <input type="radio" id="actions" value="actions" v-model="type" />
       <label for="actions">actions</label>
@@ -72,34 +69,16 @@
 
                 <template #item="{element, index}">
                   <li :class="element.type">
-                    <!-- {{ element.type }} -->
-
                       <ActionElement :dragelmt="element" v-if="element.type == 'items'"/>
                       <TimeElement  :dragelmt="element" v-if="element.type == 'times'"/>
                       <condition-element :dragelmt="element" v-if="element.type == 'conditions'"/>
-     
-
-                  <!-- {{ index }} - {{ element.name }} -->
-                  <!-- <TimeElement :dragelmt="element" v-if="element.type === 'times'" /> -->
-                  <!-- <ConditionElement :dragelmt="element" v-if="element.type === 'conditions'" /> -->
-                  
-                  
-
+                      <div class="line">{{ index }}</div>
                 </li>
                 </template>
                 
               </draggable>
             </div>
               </div>
-
-              <!-- <draggable-element /> -->
-
-              <canvas class="canvas-zone">
-
-              </canvas>
-
-
-
 
     </div>
 </template>
@@ -197,7 +176,6 @@ export default {
   box-shadow: 0 0 3px #333;
   margin: 1rem 0;
   padding: 0.5rem;
-  position: relative;
 }
 .action-zone li{
   list-style: none;
@@ -214,7 +192,6 @@ export default {
   background-color: #f5c74830;
   box-shadow: 0 0 3px #333;
   margin: 1rem 0;
-  position: relative;
 }
 
 .drop-title{
@@ -231,33 +208,24 @@ export default {
   box-shadow: 0 0 3px #333;
   margin: 1rem 0;
   padding: 0.5rem;
-  position: relative;
 }
 .svg-zone li{
+  width:100%;
   list-style: none;
-  margin: 0.5rem 0;
-  box-shadow: 0 0 3px #333;
+  margin: auto;
   cursor: grab;
-  box-shadow: 0 0 3px #333;
 }
 
-
-svg{
-  height: fit-content;
-  overflow: hidden;
+.line{
+  position:relative;
+  height: 1rem;
 }
-.actions{
-  background-color: #f5c748;
+.line::after{
+  position:absolute;
+  content:'|';
+  left:50%;
+  transform: translateX(-50%);
 }
-
-.times{
-  background-color: #00bd7e;
-}
-
-.conditions{
-  background-color: aquamarine;
-}
-
 
 svg:hover{
   cursor: grab;
