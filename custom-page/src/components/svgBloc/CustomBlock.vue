@@ -1,14 +1,14 @@
 <template>
   <svg>
 
-    <rect 
+    <!-- <rect 
       fill-opacity="0" 
       x="12" 
       y="64" 
       height="56" 
       width="149.40740585327148"
       >
-    </rect>
+    </rect> -->
     
 
     <g 
@@ -16,29 +16,30 @@
       class="blocklyDraggable" 
       data-shapes="stack" 
       data-category="motion"
-      transform="translate(12,64)">
+      transform="translate(12,64)"
+      >
 
       <path 
         class="blocklyPath blocklyBlockBackground" 
         stroke="#3373CC" 
         fill="#4C97FF" 
         fill-opacity="1"
-        d="m 0,4 A 4,4 0 0,1 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 145.40740585327148 a 4,4 0 0,1 4,4 v 40  a 4,4 0 0,1 -4,4 H 48   c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0,1 -4,-4 z">
+        d="m 0,4 A 4,4 0 0,1 4,0 H 12 c 2,0 3,1 4,2 l 4,4 c 1,1 2,2 4,2 h 12 c 2,0 3,-1 4,-2 l 4,-4 c 1,-1 2,-2 4,-2 H 200 a 4,4 0 0,1 4,4 v 40  a 4,4 0 0,1 -4,4 H 48   c -2,0 -3,1 -4,2 l -4,4 c -1,1 -2,2 -4,2 h -12 c -2,0 -3,-1 -4,-2 l -4,-4 c -1,-1 -2,-2 -4,-2 H 4 a 4,4 0 0,1 -4,-4 z">
       </path>
 
-      <g 
+      <!-- <g 
         data-id="K_32Ypr;**[|E;4w{rBp" 
         data-argument-type="text number" 
         data-shapes="argument round"
         transform="translate(55.143516540527344,8)">
-        <!-- <path 
+        <path 
           class="blocklyPath blocklyBlockBackground" 
           stroke="#3373CC" 
           fill="#FFFFFF" 
           fill-opacity="1"
           d="m 0,0 m 16,0 H 24 a 16 16 0 0 1 0 32 H 16 a 16 16 0 0 1 0 -32 z">
-        </path> -->
-        <!-- <g 
+        </path>
+        <g 
           class="blocklyEditableText" 
           transform="translate(8, 0) " 
           style="cursor: text;">
@@ -51,18 +52,19 @@
             text-anchor="middle">
             10
           </text>
-        </g> -->
-      </g>
+        </g>
+      </g> -->
       <text 
         class="blocklyText" 
         y="2" 
-        text-anchor="middle" 
+        text-anchor="start" 
         dominant-baseline="middle" 
         dy="0" 
-        x="19.571758270263672"
+        x="2"
         transform="translate(8, 24) ">
         {{ msg }}
       </text>
+
       <!-- <path 
         class="blocklyPath" 
         style="visibility: hidden" 
@@ -94,4 +96,6 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+
+</style>

@@ -5,9 +5,11 @@
 
       <ul style="color: red;marginBottom:2rem;">// TODO
         <li><input type="checkbox" checked> créer des rectangles svg avec texte pour les actions</li>
-        <li><input type="checkbox"> afficher la liste des actions à gauche</li>
-        <li><input type="checkbox"> afficher la liste des actions dans le canvas à droite</li>
-        <li><input type="checkbox"> drag and drop vers le canvas</li>
+        <li><input type="checkbox" checked> créer des types (actions, temps, conditions)</li>
+        <li><input type="checkbox"> créer des formes pour chaque type (actions, temps, conditions)</li>
+        <li><input type="checkbox" checked> afficher la liste des actions à gauche</li>
+        <li><input type="checkbox" checked> afficher la liste des actions dans le "canvas" à droite</li>
+        <li><input type="checkbox" checked> drag and drop vers le "canvas"</li>
         <li><input type="checkbox"> fct lors du focus</li>
         <li><input type="checkbox"> fct lors du drag</li>
         <li><input type="checkbox"> fct lors du mvt</li>
@@ -16,6 +18,7 @@
       </ul>
 
       <custom-block msg="Custom" />
+      <ActionElement :dragelmt="items[0]" />
 
             <div>Picked: {{ type }}</div>
 
@@ -31,7 +34,6 @@
 
 
       <div class="dragdrop-zone">
-
         
         <div class="zone">
       <p class="drop-title">Drag in this list</p>
@@ -70,14 +72,19 @@
 
                 <template #item="{element, index}">
                   <li :class="element.type">
-                  <svg height="30" width="auto">
-                    <text 
-                      y="20" 
-                      x="10"
-                      >
-                      {{ index }} - {{ element.name }}
-                    </text>
-                  </svg>
+                    <!-- {{ element.type }} -->
+
+                      <ActionElement :dragelmt="element" v-if="element.type == 'items'"/>
+                      <TimeElement  :dragelmt="element" v-if="element.type == 'times'"/>
+                      <condition-element :dragelmt="element" v-if="element.type == 'conditions'"/>
+     
+
+                  <!-- {{ index }} - {{ element.name }} -->
+                  <!-- <TimeElement :dragelmt="element" v-if="element.type === 'times'" /> -->
+                  <!-- <ConditionElement :dragelmt="element" v-if="element.type === 'conditions'" /> -->
+                  
+                  
+
                 </li>
                 </template>
                 
@@ -101,9 +108,12 @@
 // à creuser
 // source : https://codepen.io/unicurva/pen/MbRYqg?editors=0110
 import draggable from 'vuedraggable';
-import DraggableElement from '../components/DraggableElement.vue';
+import DraggableElement from '../components/svgBloc/DraggableElement.vue';
 import dbData from '../data/data.json';
-import CustomBlock from '../components/CustomBlock.vue';
+import CustomBlock from '../components/svgBloc/CustomBlock.vue';
+import ActionElement from '../components/svgBloc/ActionElement.vue';
+import TimeElement from '../components/svgBloc/TimeElement.vue';
+import ConditionElement from '../components/svgBloc/ConditionElement.vue';
 
 export default {
     name: 'CanvasSvgView',
@@ -111,6 +121,9 @@ export default {
         draggable,
         DraggableElement,
         CustomBlock,
+        ActionElement,
+        TimeElement,
+        ConditionElement,
         },
     data() {
         return {
@@ -121,7 +134,7 @@ export default {
         times: dbData.times,
         conditions: dbData.conditions,
         list: '',
-        type: '',
+        type: 'actions',
         }
     },
     
@@ -176,6 +189,8 @@ export default {
   flex-direction: column;
   align-items: center;
 }
+
+/* zone pour choisir les éléments */
 .action-zone{
   width: 75%;
   background-color: #f5c74830;
@@ -192,6 +207,8 @@ export default {
   box-shadow: 0 0 3px #333;
   cursor: grab;
 }
+
+/* zone pour construire les suites d'éléments */
 .canvas-zone{
   width: 50%;
   background-color: #f5c74830;
@@ -216,19 +233,29 @@ export default {
   padding: 0.5rem;
   position: relative;
 }
+.svg-zone li{
+  list-style: none;
+  margin: 0.5rem 0;
+  box-shadow: 0 0 3px #333;
+  cursor: grab;
+  box-shadow: 0 0 3px #333;
+}
 
 
 svg{
-  box-shadow: 0 0 3px #333;
-  margin: 0.3rem 0;
   height: fit-content;
+  overflow: hidden;
 }
-.action{
+.actions{
   background-color: #f5c748;
 }
 
-.time{
+.times{
   background-color: #00bd7e;
+}
+
+.conditions{
+  background-color: aquamarine;
 }
 
 

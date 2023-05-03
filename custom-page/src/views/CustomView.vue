@@ -207,7 +207,7 @@
 import draggable from 'vuedraggable';
 import logo from '../assets/images/logo400px.png';
 import dbData from '../data/data.json';
-import DraggableElement from '../components/DraggableElement.vue';
+import DraggableElement from '../components/svgBloc/ActionElement.vue';
 
 
 // source : https://learnvue.co/articles/vue-drag-and-drop
