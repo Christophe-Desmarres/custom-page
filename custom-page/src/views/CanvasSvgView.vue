@@ -79,7 +79,9 @@
               </draggable>
             </div>
               </div>
-
+              <div id="myCanvas" style="border:1px solid #000000;width: 700px;height: 500px;margin-bottom: 2rem;">
+              </div>
+              
     </div>
 </template>
 
@@ -93,6 +95,70 @@ import CustomBlock from '../components/svgBloc/CustomBlock.vue';
 import ActionElement from '../components/svgBloc/ActionElement.vue';
 import TimeElement from '../components/svgBloc/TimeElement.vue';
 import ConditionElement from '../components/svgBloc/ConditionElement.vue';
+import * as d3 from 'd3';
+
+
+var width = 700,
+    height = 500,
+    resolution = 5,
+    r = 15;
+
+    // créer un tableau de 10 coordonnées aléatoires x et y
+var points = d3.range(10).map(function() {
+  return {
+    x: round(Math.random() * width, resolution),
+    y: round(Math.random() * height, resolution)
+  };
+});
+
+
+var drag = d3.drag()
+    // .origin(function(d) { return d; })
+    .on('drag', dragged);
+
+    // var svg = d3.select('body').append('svg')
+    var svg = d3.select("#myCanvas").append('svg')
+    .attr('width', width)
+    .attr('height', height);
+
+svg.selectAll('.vertical')
+    .data(d3.range(1, width / resolution))
+  .enter().append('line')
+    .attr('class', 'vertical')
+    .attr('x1', function(d) { return d * resolution; })
+    .attr('y1', 0)
+    .attr('x2', function(d) { return d * resolution; })
+    .attr('y2', height);
+
+svg.selectAll('.horizontal')
+    .data(d3.range(1, height / resolution))
+  .enter().append('line')
+    .attr('class', 'horizontal')
+    .attr('x1', 0)
+    .attr('y1', function(d) { return d * resolution; })
+    .attr('x2', width)
+    .attr('y2', function(d) { return d * resolution; });
+
+var circles = svg.selectAll('circle')
+    .data(points)
+  .enter().append('circle')
+    .attr('cx', function(d) { return d.x; })
+    .attr('cy', function(d) { return d.y; })
+    .attr('r', r)
+    .call(drag);
+
+function dragged(d) {
+  var x = d3.event.x,
+      y = d3.event.y,
+      gridX = round(Math.max(r, Math.min(width - r, x)), resolution),
+      gridY = round(Math.max(r, Math.min(height - r, y)), resolution);
+
+  d3.select(this).attr('cx', d.x = gridX).attr('cy', d.y = gridY);
+}
+
+function round(p, n) {
+  return p % n < n / 2 ? p - (p % n) : p + n - (p % n);
+}
 
 export default {
     name: 'CanvasSvgView',
@@ -237,6 +303,25 @@ svg:active{
 
 svg:focus{
   cursor: grabbing;
+}
+
+
+/* canvas zone */
+svg {
+  box-sizing: border-box;
+  border: 1px solid rgb(212, 212, 212);
+}
+
+circle {
+  stroke: rgb(95, 176, 228);
+  stroke-width: 2;
+  fill: rgba(205, 246, 255, 0.3);
+}
+
+line {
+  stroke: rgb(212, 212, 212);
+  stroke-width: 1px;
+  shape-rendering: crispEdges;
 }
 
 </style>
