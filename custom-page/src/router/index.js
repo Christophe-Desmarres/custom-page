@@ -23,9 +23,14 @@ const router = createRouter({
       component: () => import('../views/CustomView.vue')
     },
     {
-      path: '/test',
-      name: 'test',
+      path: '/diagramcanvassvg',
+      name: 'diagramcanvassvg',
       component: () => import('../views/CanvasSvgView.vue')
+    },
+    {
+      path: '/gojs',
+      name: 'gojs',
+      component: () => import('../views/GoJsView.vue')
     },
     {
       path: '/:pathMatch(.*)*',
