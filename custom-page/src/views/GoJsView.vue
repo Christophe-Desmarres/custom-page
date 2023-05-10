@@ -1,7 +1,8 @@
 <template>
     <div>
         <div id="myDiagramDiv">
-            <RectBloc x="100" y="200" backgroundColor="blue" />
+            <RectBloc id="rectangle1" v-bind="rectangle1" @click="changeXY" />
+            <RectBloc id="rectangle2" v-bind="rectangle2"  @click="changeXY" />
 
         </div>
         <div id="myPaletteDiv"></div>
@@ -20,9 +21,30 @@ export default {
         },
     data() {
         return {
+         rectangle1: {
+            x: 70,
+            y: 150,
+            width: 100,
+            height: 100,
+            backgroundColor: 'greenyellow',
+            message:"Hello"
+          },
+          rectangle2: {
+            x: 250,
+            y: 150,
+            width: 100,
+            height: 100,
+            backgroundColor: 'aquamarine',
+            message:""
+          },
         }
     },
     methods: {
+        changeXY(e,x,y) {
+          console.log(e.target.id)
+          console.log(e.offsetX, e.offsetY)
+
+        }
 
     },
     computed: {
@@ -36,6 +58,8 @@ export default {
         border: solid 1px black;
         width:90%;
         height:600px;
+        position: relative;
+        overflow: hidden;
     }
     #myPaletteDiv {
         border: solid 1px black;

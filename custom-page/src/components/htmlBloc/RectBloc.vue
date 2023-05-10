@@ -1,21 +1,26 @@
 <template>
   <div       
     class="rect"
-    :style="{ width: startWidth + 'px', height: startHeight + 'px', backgroundColor: backgroundColor, position: 'absolute', left: startX + 'px', top: startTop + 'px', cursor: dragging ? 'move' : 'default' }"
+    :style="{ width: startWidth + 'px', height: startHeight + 'px', backgroundColor: backgroundColor, position: 'absolute', left: startX + 'px', top: startY + 'px', cursor: dragging ? 'move' : 'default' }"
     @mousedown="startDragging"
     >
+    <div>
+
       <!-- <div
         :style="{ width: startWidth + 'px', height: startHeight + 'px', backgroundColor: backgroundColor, position: 'absolute', left: x + 'px', top: y + 'px' }"
         @mousedown="startResize"
         > -->
-        <span id="height">{{ startHeight }}px</span>
-        <span id="width">{{ startWidth }}px</span>
+        <span :class="this.message ? 'message' : ''">{{ this.message }}</span>
+        <span class="height">{{ startHeight }}px</span>
+        <span class="width">{{ startWidth }}px</span>
+        <span style="margin:-30px 0 0 20px" >{{ startX }} - {{ startY }}</span>
+      </div>
   </div>
 </template>
 
 <script>
 export default {
-
+  name: 'RectBloc',
     props: {
     x: {
       type: Number,
@@ -36,14 +41,18 @@ export default {
     backgroundColor: {
       type: String,
       default: 'red'
+    },
+    message: {
+      type: String,
+      default: ''
     }
   },
   data() {
     return {
       dragging: false,
       resizing: false,
-      startX: 0,
-      startY: 0,
+      startX: this.x,
+      startY: this.y,
       startWidth: this.width,
       startHeight: this.height,
       startLeft: 0,
@@ -54,22 +63,31 @@ export default {
     startDragging(event) {
       if (event.target === this.$el) {
         this.dragging = true
-        this.startX = event.clientX
-        this.startY = event.clientY
-        this.startLeft = this.x
-        this.startTop = this.y
-        console.log(this.startX, this.startY);
-        console.log(this.startLeft, this.startTop);
+        // position de la souris dans le canvas lors du drag
+        this.startLeft = event.clientX
+        this.startTop = event.clientY
+
+        console.log(event.offsetX, event.offsetY)
+
+
+        // this.startX = event.clientX
+        // this.startY = event.clientY
+        // this.startLeft = this.x
+        // this.startTop = this.y
+        // console.log(this.startX, this.startY);
+        // console.log(this.startLeft, this.startTop);
         document.addEventListener('mousemove', this.drag)
         document.addEventListener('mouseup', this.stopDragging)
       }
     },
     drag(event) {
       if (this.dragging) {
+        // position souris - position du cube
         const deltaX = event.clientX - this.startX
         const deltaY = event.clientY - this.startY
+
         this.startX = this.startLeft + deltaX
-        this.starty = this.startTop + deltaY
+        this.startY = this.startTop + deltaY
       }
     },
     stopDragging() {
@@ -116,6 +134,7 @@ export default {
     .rect {
         border: solid 1px black;
         cursor: move;
+        user-select: none;
     }
 
     .rect:hover {
@@ -125,18 +144,28 @@ export default {
 
     span {
         position: absolute;
-        background-color: white;
+        border-radius: 5px;
         padding: 0.5rem;
         font-size: 0.8rem;
+        font-weight: 600;
     }
 
-    #height{
+    .message{
+        background-color: #ffffff70;
         top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .height{
+        background-color: #ffffff70;
+        top: 25%;
         left: 0;
         transform: translateY(-50%);
     }
 
-    #width{
+    .width{
+        background-color: #ffffff70;
         bottom: 0;
         left: 50%;
         transform: translateX(-50%);
