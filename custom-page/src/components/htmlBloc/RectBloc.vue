@@ -55,8 +55,10 @@ export default {
       startY: this.y,
       startWidth: this.width,
       startHeight: this.height,
-      startLeft: 0,
-      startTop: 0
+      ecartX:0,
+      ecartY:0,
+      mouseX: 0,
+      mouseY: 0
     }
   },
   methods: {
@@ -64,30 +66,39 @@ export default {
       if (event.target === this.$el) {
         this.dragging = true
         // position de la souris dans le canvas lors du drag
-        this.startLeft = event.clientX
-        this.startTop = event.clientY
 
-        console.log(event.offsetX, event.offsetY)
+        // // position de la bordure gauche de l'élément dans le canvas
+        // console.log(this.$el.offsetLeft)
+        // // position de la souris par rapport au bord du canvas
+        // console.log(event.clientX)
+        // // position de la souris par rapport au bord gauche de l'élément
+        // console.log(event.offsetX)
+        // // position de la souris par rapport au bord du canvas
+        // console.log(event.x)
 
 
-        // this.startX = event.clientX
-        // this.startY = event.clientY
-        // this.startLeft = this.x
-        // this.startTop = this.y
-        // console.log(this.startX, this.startY);
-        // console.log(this.startLeft, this.startTop);
+        // je récupere la position de la souris sur le canvas
+          this.mouseX = event.clientX;
+          this.mouseY = event.clientY;
+
+        // calcul de l'écart entre la position de la souris et la position des bords gauche et haut de l'élément
+        this.ecartX = this.mouseX - this.$el.offsetLeft;
+        this.ecartY = this.mouseY - this.$el.offsetTop;
+
         document.addEventListener('mousemove', this.drag)
         document.addEventListener('mouseup', this.stopDragging)
       }
     },
     drag(event) {
       if (this.dragging) {
-        // position souris - position du cube
-        const deltaX = event.clientX - this.startX
-        const deltaY = event.clientY - this.startY
-
-        this.startX = this.startLeft + deltaX
-        this.startY = this.startTop + deltaY
+        // je déplace l'élément en fonction de la position de la souris
+        // position de la souris
+        this.mouseX = event.x;
+        this.mouseY = event.y;
+        
+        // nouvelle position de l'élément
+        this.startX = this.mouseX - this.ecartX
+        this.startY = this.mouseY - this.ecartY
       }
     },
     stopDragging() {
