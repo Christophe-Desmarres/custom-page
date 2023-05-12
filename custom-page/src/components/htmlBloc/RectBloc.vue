@@ -2,6 +2,7 @@
   <div       
     class="rect"
     :style="{ width: startWidth + 'px', height: startHeight + 'px', backgroundColor: backgroundColor, position: 'absolute', left: startX + 'px', top: startY + 'px', cursor: dragging ? 'move' : 'default' }"
+    @click="onClick"
     @mousedown="startDragging"
     >
     <div>
@@ -10,7 +11,7 @@
         :style="{ width: startWidth + 'px', height: startHeight + 'px', backgroundColor: backgroundColor, position: 'absolute', left: x + 'px', top: y + 'px' }"
         @mousedown="startResize"
         > -->
-        <span :class="this.message ? 'message' : ''">{{ this.message }}</span>
+        <span :class="this.message ? 'message' : 'empty'">{{ this.message }}</span>
         <span class="height">{{ startHeight }}px</span>
         <span class="width">{{ startWidth }}px</span>
         <span style="margin:-30px 0 0 20px" >{{ startX }} - {{ startY }}</span>
@@ -58,10 +59,16 @@ export default {
       ecartX:0,
       ecartY:0,
       mouseX: 0,
-      mouseY: 0
+      mouseY: 0,
+      selected: false
     }
   },
   methods: {
+    onClick(event) {
+      let shape = event.target;
+      shape.classList.toggle('selected');
+        console.log('click', event.target)
+    },
     startDragging(event) {
       if (event.target === this.$el) {
         this.dragging = true
@@ -150,7 +157,6 @@ export default {
 
     .rect:hover {
         background-color: #eee;
-        box-shadow: inset 0 0 0 5px #000;
     }
 
     span {
@@ -159,6 +165,10 @@ export default {
         padding: 0.5rem;
         font-size: 0.8rem;
         font-weight: 600;
+    }
+
+    .empty{
+      display: none;
     }
 
     .message{
@@ -180,6 +190,10 @@ export default {
         bottom: 0;
         left: 50%;
         transform: translateX(-50%);
+    }
+
+    .selected {
+        box-shadow: inset 0 0 0 2px red;
     }
 
     div:hover {
