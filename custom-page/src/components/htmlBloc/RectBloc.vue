@@ -1,8 +1,8 @@
 <template>
-  <div       
+  <div  
+    :id="'rect' + this.id"     
     class="rect"
     :style="{ width: startWidth + 'px', height: startHeight + 'px', backgroundColor: backgroundColor, position: 'absolute', left: startX + 'px', top: startY + 'px', cursor: dragging ? 'move' : 'default' }"
-    @click="onClick"
     @mousedown="startDragging"
     >
     <div>
@@ -23,6 +23,9 @@
 export default {
   name: 'RectBloc',
     props: {
+    id: {
+      type: Number      
+    },
     x: {
       type: Number,
       default: 50
@@ -60,14 +63,24 @@ export default {
       ecartY:0,
       mouseX: 0,
       mouseY: 0,
-      selected: false
+      selected: ""
     }
   },
   methods: {
     onClick(event) {
-      let shape = event.target;
-      shape.classList.toggle('selected');
-        console.log('click', event.target)
+
+      // je récupère l'élément selectionné
+      this.selected = event.target;
+
+      // je déselectionne tout les autres éléments
+      let allSelected = document.querySelectorAll('.selected');
+      allSelected.forEach((element) => {
+        element.classList.remove('selected');
+      });
+
+      // j'ajoute la class selected à l'élément selectionné
+      this.selected.classList.add('selected');
+
     },
     startDragging(event) {
       if (event.target === this.$el) {
@@ -82,6 +95,8 @@ export default {
         // console.log(event.offsetX)
         // // position de la souris par rapport au bord du canvas
         // console.log(event.x)
+
+        this.onClick(event);
 
 
         // je récupere la position de la souris sur le canvas
@@ -155,6 +170,8 @@ export default {
         user-select: none;
     }
 
+
+
     .rect:hover {
         background-color: #eee;
     }
@@ -196,27 +213,20 @@ export default {
         box-shadow: inset 0 0 0 2px red;
     }
 
-    div:hover {
-        background-color: #eee;
-    }
 
-    div:active {
+    .rect:active span {
         background-color: #ddd;
     }
 
-    div:active span {
-        background-color: #ddd;
-    }
-
-    div:hover span {
+    .rect:hover span {
         background-color: #eee;
     }
 
-    div:active:hover {
+    .rect:active:hover {
         background-color: #ccc;
     }
 
-    div:active:hover span {
+    .rect:active:hover span {
         background-color: #ccc;
     }
 

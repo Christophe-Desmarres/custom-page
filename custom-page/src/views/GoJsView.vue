@@ -1,8 +1,11 @@
 <template>
     <div>
-        <div id="myDiagramDiv">
-            <RectBloc id="rectangle1" v-bind="rectangle1" @click="changeXY" />
-            <RectBloc id="rectangle2" v-bind="rectangle2"  @click="changeXY" />
+        <div 
+        id="canvas"
+        @click="origin"        
+        >
+            <RectBloc v-bind="rectangle1"/>
+            <RectBloc v-bind="rectangle2"/>
 
         </div>
         <div id="myPaletteDiv">
@@ -43,6 +46,7 @@ export default {
     data() {
         return {
          rectangle1: {
+            id:1,
             x: 70,
             y: 150,
             width: 100,
@@ -51,6 +55,7 @@ export default {
             message:"Hello"
           },
           rectangle2: {
+            id:2,
             x: 250,
             y: 150,
             width: 100,
@@ -62,9 +67,17 @@ export default {
     },
     methods: {
         changeXY(e,x,y) {
-          console.log(e.target.id)
+          // console.log(e.target.id)
           // console.log(e.offsetX, e.offsetY)
-
+        },
+        origin(e) {
+          console.log(e.target.id)
+          if (e.target.id === "canvas") {
+            let allSelected = document.querySelectorAll('.selected');
+            allSelected.forEach((element) => {
+              element.classList.remove('selected');
+            });
+          }
         }
 
     },
@@ -75,7 +88,7 @@ export default {
 </script>
 
 <style scoped>
-    #myDiagramDiv {
+    #canvas {
         border: solid 1px black;
         width:90%;
         height:600px;
