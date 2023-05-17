@@ -4,8 +4,9 @@
         id="canvas"
         @click="origin"        
         >
-            <RectBloc v-bind="rectangle1"/>
-            <RectBloc v-bind="rectangle2"/>
+          <RectBloc v-for="shape in shapes.filter(shape=>shape.type==='rectangle')" v-bind="shape" :key="shape.id" @mousedown="changeXY($event,shape.x,shape.y)"/>
+          <RoundBloc v-for="shape in shapes.filter(shape=>shape.type==='round')" v-bind="shape" :key="shape.id" @mousedown="changeXY($event,shape.x,shape.y)"/>
+          <DiamondBloc v-for="shape in shapes.filter(shape=>shape.type==='losange')" v-bind="shape" :key="shape.id" @mousedown="changeXY($event,shape.x,shape.y)"/>
 
         </div>
         <div id="myPaletteDiv">
@@ -36,33 +37,61 @@
 
 <script>
 import RectBloc from '../components/htmlBloc/RectBloc.vue'
+import RoundBloc from '../components/htmlBloc/RoundBloc.vue'
+import DiamondBloc from '../components/htmlBloc/DiamondBloc.vue'
 
 export default {
     name: 'GoJsView',
     components: {
-        RectBloc
+        RectBloc,
+        RoundBloc,
+        DiamondBloc
 
         },
     data() {
         return {
-         rectangle1: {
-            id:1,
-            x: 70,
-            y: 150,
-            width: 100,
-            height: 100,
-            backgroundColor: 'greenyellow',
-            message:"Hello"
-          },
-          rectangle2: {
-            id:2,
-            x: 250,
-            y: 150,
-            width: 100,
-            height: 100,
-            backgroundColor: 'aquamarine',
-            message:""
-          },
+          shapes:[
+            {
+              type:"rectangle",
+              id:1,
+              x: 70,
+              y: 150,
+              width: 100,
+              height: 100,
+              backgroundColor: 'greenyellow',
+              message:"Hello"
+            },
+            {
+              type:"rectangle",
+              id:2,
+              x: 250,
+              y: 150,
+              width: 100,
+              height: 100,
+              backgroundColor: 'aquamarine',
+              message:"rect"
+            },
+            {
+              type:"losange",
+              id:3,
+              x: 430,
+              y: 150,
+              width: 100,
+              height: 100,
+              backgroundColor: 'bisque',
+              message:"diamond"
+            },
+            {
+              type:"round",
+              id:4,
+              x: 610,
+              y: 150,
+              width: 100,
+              height: 100,
+              backgroundColor: 'blueviolet',
+              message:"the ring"
+            },
+            ]
         }
     },
     methods: {

@@ -1,7 +1,7 @@
 <template>
   <div  
-    :id="'rect' + this.id"     
-    class="rect"
+    :id="'round' + this.id"     
+    class="round"
     :style="{ width: startWidth + 'px', height: startHeight + 'px', backgroundColor: backgroundColor, position: 'absolute', left: startX + 'px', top: startY + 'px', cursor: dragging ? 'move' : 'default' }"
     @mousedown="startDragging"
     >
@@ -12,8 +12,7 @@
         @mousedown="startResize"
         > -->
         <span contenteditable="true" :class="this.message ? 'message' : 'empty'">{{ this.message }}</span>
-        <span class="height">{{ startHeight }}px</span>
-        <span class="width">{{ startWidth }}px</span>
+        <span class="rayon">{{ startHeight }}px</span>
         <span style="margin:-30px 0 0 20px" >{{ startX }} - {{ startY }}</span>
       </div>
   </div>
@@ -21,7 +20,7 @@
 
 <script>
 export default {
-  name: 'RectBloc',
+  name: 'RoundBloc',
     props: {
     id: {
       type: Number      
@@ -164,15 +163,27 @@ export default {
 <style>
 
     
-    .rect {
-        border: solid 1px black;
+    .round {
+        border: solid 3px black;
+        border-radius: 50%;
         cursor: move;
         user-select: none;
     }
 
+    .round::after {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 100%;
+        border: solid 3px yellowgreen;
+        border-radius: 50%;
+    }
 
 
-    .rect:hover {
+
+
+
+    .round:hover {
         background-color: #eee;
     }
 
@@ -195,38 +206,33 @@ export default {
         transform: translate(-50%, -50%);
     }
 
-    .height{
+    .rayon{
         background-color: #ffffff70;
         top: 25%;
         left: 0;
         transform: translateY(-50%);
     }
 
-    .width{
-        background-color: #ffffff70;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-    }
+
 
     .selected {
         box-shadow: inset 0 0 0 2px red;
     }
 
 
-    .rect:active span {
+    .round:active span {
         background-color: #ddd;
     }
 
-    .rect:hover span {
+    .round:hover span {
         background-color: #eee;
     }
 
-    .rect:active:hover {
+    .round:active:hover {
         background-color: #ccc;
     }
 
-    .rect:active:hover span {
+    .round:active:hover span {
         background-color: #ccc;
     }
 

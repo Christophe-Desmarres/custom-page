@@ -1,7 +1,7 @@
 <template>
   <div  
-    :id="'rect' + this.id"     
-    class="rect"
+    :id="'diamond' + this.id"     
+    class="diamond"
     :style="{ width: startWidth + 'px', height: startHeight + 'px', backgroundColor: backgroundColor, position: 'absolute', left: startX + 'px', top: startY + 'px', cursor: dragging ? 'move' : 'default' }"
     @mousedown="startDragging"
     >
@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  name: 'RectBloc',
+  name: 'DiamondBloc',
     props: {
     id: {
       type: Number      
@@ -164,49 +164,58 @@ export default {
 <style>
 
     
-    .rect {
+    .diamond {
         border: solid 1px black;
+        transform: rotate(45deg);
         cursor: move;
         user-select: none;
     }
 
 
 
-    .rect:hover {
+    .diamond:hover {
         background-color: #eee;
     }
 
-    span {
+    .diamond span {
         position: absolute;
         border-radius: 5px;
         padding: 0.5rem;
         font-size: 0.8rem;
         font-weight: 600;
+        transform: rotate(-45deg);
+
     }
 
-    .empty{
+    .diamond .empty{
       display: none;
     }
 
-    .message{
+    .diamond .message{
         background-color: #ffffff70;
-        top: 50%;
-        left: 50%;
+        top: 30%;
+        left: 30%;
         transform: translate(-50%, -50%);
+        transform: rotate(-45deg);
+
     }
 
-    .height{
+    .diamond .height{
         background-color: #ffffff70;
         top: 25%;
         left: 0;
         transform: translateY(-50%);
+        transform: rotate(-45deg);
+
     }
 
-    .width{
+    .diamond .width{
         background-color: #ffffff70;
         bottom: 0;
         left: 50%;
         transform: translateX(-50%);
+        transform: rotate(-45deg);
+
     }
 
     .selected {
@@ -214,19 +223,19 @@ export default {
     }
 
 
-    .rect:active span {
+    .diamond:active span {
         background-color: #ddd;
     }
 
-    .rect:hover span {
+    .diamond:hover span {
         background-color: #eee;
     }
 
-    .rect:active:hover {
+    .diamond:active:hover {
         background-color: #ccc;
     }
 
-    .rect:active:hover span {
+    .diamond:active:hover span {
         background-color: #ccc;
     }
 
