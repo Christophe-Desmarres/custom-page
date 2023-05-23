@@ -84,19 +84,7 @@ export default {
     startDragging(event) {
       if (event.target === this.$el) {
         this.dragging = true
-        // position de la souris dans le canvas lors du drag
-
-        // // position de la bordure gauche de l'élément dans le canvas
-        // console.log(this.$el.offsetLeft)
-        // // position de la souris par rapport au bord du canvas
-        // console.log(event.clientX)
-        // // position de la souris par rapport au bord gauche de l'élément
-        // console.log(event.offsetX)
-        // // position de la souris par rapport au bord du canvas
-        // console.log(event.x)
-
         this.onClick(event);
-
 
         // je récupere la position de la souris sur le canvas
           this.mouseX = event.clientX;
@@ -164,24 +152,11 @@ export default {
 
     
     .round {
-        border: solid 3px black;
+        border: solid 1px black;
         border-radius: 50%;
         cursor: move;
         user-select: none;
     }
-
-    .round::after {
-        content: "";
-        display: block;
-        width: 100%;
-        height: 100%;
-        border: solid 3px yellowgreen;
-        border-radius: 50%;
-    }
-
-
-
-
 
     .round:hover {
         background-color: #eee;

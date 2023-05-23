@@ -10,10 +10,11 @@
 
         </div>
         <div id="myPaletteDiv">
-            <div id="form1" class="palette__form rect draggable" style="background-color: greenyellow;"></div>
+            <div id="form1" class="palette__form square draggable" style="background-color: greenyellow;"></div>
             <div id="form2" class="palette__form rect draggable" style="background-color: aquamarine;"></div>
             <div id="form3" class="palette__form losange draggable" style="background-color: bisque;"></div>
             <div id="form4" class="palette__form round draggable" style="background-color: blueviolet;"></div>
+            <div id="form4" class="palette__form ellipse draggable" style="background-color: orange;"></div>
 
         </div>
         <div id="mySavedModel"><button>sauvegarder</button>
@@ -66,8 +67,8 @@ export default {
               id:2,
               x: 250,
               y: 150,
-              width: 100,
-              height: 100,
+              width: 75,
+              height: 125,
               backgroundColor: 'aquamarine',
               message:"rect"
             },
@@ -76,8 +77,8 @@ export default {
               id:3,
               x: 430,
               y: 150,
-              width: 100,
-              height: 100,
+              width: 90,
+              height: 90,
               backgroundColor: 'bisque',
               message:"diamond"
             },
@@ -140,8 +141,12 @@ export default {
         cursor: move;
     }
 
+    .square{
+        width: 50px;
+        height: 50px;
+      }
     .rect{
-
+      width: 70px;
     }
 
     .losange{
@@ -152,6 +157,12 @@ export default {
 
     .round{
         border-radius: 50%;
+    }
+
+    .ellipse{
+        border-radius: 50%;
+        width: 70px;
+        height: 50px;
     }
 
 

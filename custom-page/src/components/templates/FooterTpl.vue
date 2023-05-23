@@ -1,7 +1,6 @@
 <template>
     <footer>
         <a href="#" aria-current="page">home</a>
-        <a href="#" aria-current="page">about</a>
         <a href="#" aria-current="page">contact</a>
         
     </footer>

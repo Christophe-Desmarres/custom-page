@@ -4,10 +4,9 @@
     <div class="wrapper">
       <nav>
         <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
         <RouterLink to="/customize">Customize</RouterLink>
         <RouterLink to="/diagramcanvassvg">CSVG</RouterLink>
-        <RouterLink to="/gojs">gojs</RouterLink>
+        <RouterLink to="/canvashtml">canvas HTML</RouterLink>
       </nav>
     </div>
   </header>

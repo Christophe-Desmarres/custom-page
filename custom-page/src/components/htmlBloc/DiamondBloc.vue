@@ -85,19 +85,7 @@ export default {
     startDragging(event) {
       if (event.target === this.$el) {
         this.dragging = true
-        // position de la souris dans le canvas lors du drag
-
-        // // position de la bordure gauche de l'élément dans le canvas
-        // console.log(this.$el.offsetLeft)
-        // // position de la souris par rapport au bord du canvas
-        // console.log(event.clientX)
-        // // position de la souris par rapport au bord gauche de l'élément
-        // console.log(event.offsetX)
-        // // position de la souris par rapport au bord du canvas
-        // console.log(event.x)
-
         this.onClick(event);
-
 
         // je récupere la position de la souris sur le canvas
           this.mouseX = event.clientX;
@@ -170,8 +158,6 @@ export default {
         cursor: move;
         user-select: none;
     }
-
-
 
     .diamond:hover {
         background-color: #eee;

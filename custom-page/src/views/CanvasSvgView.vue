@@ -1,8 +1,7 @@
 <template>
     <div>
         <h1>CanvasSvgVue</h1>
-        <p>CanvasSvgVue</p>
-
+        <p>Drag and drop elements from the left to the right</p>
       <ul style="color: red;marginBottom:2rem;">// TODO
         <li><input type="checkbox" checked> créer des rectangles avec texte pour les actions</li>
         <li><input type="checkbox" checked> créer des types (actions, temps, conditions)</li>
