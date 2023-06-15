@@ -44,19 +44,6 @@ import HelloWorld from '../components/HelloWorld.vue';
             <em>- ChatGPT Mar 23 Version -</em>
         </div>
         <div class="about">
-            <h2>Vuedraggable</h2>
-            <p>
-            vuedraggable est une bibliothèque de composants Vue.js qui permettent de créer des interfaces utilisateur interactives de type glisser-déposer. Cette bibliothèque permet aux développeurs de créer des fonctionnalités glisser-déposer complexes en utilisant des composants simples et réutilisables.
-            <br>
-            vuedraggable offre une grande flexibilité dans la création d'interfaces utilisateur, en permettant aux utilisateurs de déplacer des éléments à l'intérieur d'une liste, de les déplacer d'une liste à l'autre, et même de trier les éléments selon différents critères. Cette bibliothèque est également compatible avec les bibliothèques de composants les plus populaires, telles que Bootstrap et Materialize.
-            <br>
-            En outre, vuedraggable est facile à utiliser et peut être personnalisé en fonction des besoins spécifiques de chaque projet. Il est également très performant, ce qui en fait une excellente option pour les projets exigeants en termes de performances.
-            <br>
-            En somme, vuedraggable est une bibliothèque de composants Vue.js très utile pour la création d'interfaces utilisateur interactives et flexibles en utilisant des fonctionnalités glisser-déposer. Elle offre des fonctionnalités avancées, une grande flexibilité et une excellente performance, ce qui en fait un outil de choix pour les développeurs qui souhaitent créer des interfaces utilisateur efficaces et interactives.
-        </p>
-        <em>- ChatGPT Mar 23 Version -</em>
-        </div>
-        <div class="about">
             <h2>Workflow</h2>
             <p>
             Un workflow est une séquence d'activités liées et organisées, effectuées par des personnes ou des systèmes, dans le but de produire un résultat ou une sortie spécifique. Les workflows sont souvent utilisés dans les entreprises pour automatiser les processus de travail et augmenter l'efficacité des opérations.

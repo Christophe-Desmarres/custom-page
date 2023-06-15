@@ -2,92 +2,105 @@
   "clients": [
     {
       "id": 0,
-      "name": "Gérard",
+      "firstname": "Gérard",
       "lastname": "Mensoif",
+      "name": "Gérard Mensoif",
       "tel": "0102030405",
       "mail": "mail@fakemail.com"
     },
     {
       "id": 1,
-      "name": "John",
+      "firstname": "John",
       "lastname": "Doe",
+      "name": "John Doe",
       "tel": "0102030405",
       "mail": "mail@fakemail.com"
     },
     {
       "id": 2,
-      "name": "Alain",
+      "firstname": "Alain",
       "lastname": "Deloin",
+      "name": "Alain Deloin",
       "tel": "0102030405",
       "mail": "mail@fakemail.com"
     },
     {
       "id": 3,
-      "name": "Abel",
+      "firstname": "Abel",
       "lastname": "Auboisdormant",
+      "name": "Abel Auboisdormant",
       "tel": "0102030405",
       "mail": "mail@fakemail.com"
     },
     {
       "id": 4,
-      "name": "Kelly",
+      "firstname": "Kelly",
       "lastname": "Diote",
+      "name": "Kelly Diote",
       "tel": "0102030405",
       "mail": "mail@fakemail.com"
     },
     {
       "id": 5,
-      "name": "Jim",
+      "firstname": "Jim",
       "lastname": "Nastik",
+      "name": "Jim Nastik",
       "tel": "0102030405",
       "mail": "mail@fakemail.com"
     },
     {
       "id": 6,
-      "name": "Léonie",
+      "firstname": "Léonie",
       "lastname": "Das",
+      "name": "Léonie Das",
       "tel": "0102030405",
       "mail": "mail@fakemail.com"
     },
     {
       "id": 7,
-      "name": "Phil",
+      "firstname": "Phil",
       "lastname": "Defer",
+      "name": "Phil Defer",
       "tel": "0102030405",
       "mail": "mail@fakemail.com"
     },
     {
       "id": 8,
-      "name": "Eléonore",
+      "firstname": "Eléonore",
       "lastname": "Iléosud",
+      "name": "Eléonore Iléosud",
       "tel": "0102030405",
       "mail": "mail@fakemail.com"
     },
     {
       "id": 9,
-      "name": "Usama",
+      "firstname": "Usama",
       "lastname": "Fémale",
+      "name": "Usama Fémale",
       "tel": "0102030405",
       "mail": "mail@fakemail.com"
     },
     {
       "id": 10,
-      "name": "Jacques",
+      "firstname": "Jacques",
       "lastname": "Célère",
+      "name": "Jacques Célère",
       "tel": "0102030405",
       "mail": "mail@fakemail.com"
     },
     {
       "id": 11,
-      "name": "Vincent",
+      "firstname": "Vincent",
       "lastname": "Time",
+      "name": "Vincent Time",
       "tel": "0102030405",
       "mail": "mail@fakemail.com"
     },
     {
       "id": 12,
-      "name": "Jerry",
+      "firstname": "Jerry",
       "lastname": "Canne",
+      "name": "Jerry Canne",
       "tel": "0102030405",
       "mail": "mail@fakemail.com"
     }
